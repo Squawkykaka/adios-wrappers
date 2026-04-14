@@ -66,7 +66,7 @@
       inherit (inputs.nixpkgs.lib.generators) toKeyValue;
       generator = attrs: writeText (toKeyValue {} attrs);
       configFlag =
-        if options ? configFile then
+        if options ? configFile || options ? settings then
           [
             "-c"
             "$out/mango/config.conf"
