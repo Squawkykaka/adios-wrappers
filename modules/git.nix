@@ -76,9 +76,6 @@
     inputs.mkWrapper {
       name = "git"; # Default derivation name is git-with-svn
       inherit (options) package;
-      preSymlink = ''
-        mkdir -p $out/git
-      '';
       symlinks = {
         "$out/git/config" =
           if options ? configFile then

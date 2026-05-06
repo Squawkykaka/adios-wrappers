@@ -69,9 +69,6 @@
       inherit (options) package;
       wrapperArgs =
         if options ? extraPackages then "--prefix PATH : ${makeBinPath options.extraPackages}" else null;
-      preSymlink = ''
-        mkdir -p $out/nushell
-      '';
       symlinks = {
         "$out/nushell/config.nu" = writeText "config.nu" assembledConfig;
       };

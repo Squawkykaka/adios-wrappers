@@ -45,9 +45,6 @@
     inputs.mkWrapper {
       inherit (options) package;
       binaryPath = "$out/bin/btm";
-      preSymlink = ''
-        mkdir -p $out/bottom
-      '';
       symlinks = {
         "$out/bottom/bottom.toml" =
           if options ? configFile then

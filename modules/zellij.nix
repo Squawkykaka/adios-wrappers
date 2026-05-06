@@ -89,10 +89,6 @@
     assert !(options ? layoutsContents && options ? layoutsFiles);
     inputs.mkWrapper {
       inherit (options) package;
-      preSymlink = ''
-        mkdir -p $out/zellij-config/themes
-        mkdir -p $out/zellij-config/layouts
-      '';
       symlinks = {
         "$out/zellij-config/config.kdl" =
           if options ? configFile then

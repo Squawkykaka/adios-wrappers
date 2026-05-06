@@ -62,9 +62,6 @@
     assert !(options ? settings && options ? configFile);
     inputs.mkWrapper {
       inherit (options) package flags;
-      preSymlink = ''
-        mkdir -p $out/discordo/
-      '';
       environment = {
         XDG_CONFIG_HOME = "$out";
         DISCORDO_TOKEN =

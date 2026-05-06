@@ -44,9 +44,6 @@
     assert !(options ? settings && options ? configFile);
     inputs.mkWrapper {
       inherit (options) package;
-      preSymlink = ''
-        mkdir -p $out/alacritty
-      '';
       symlinks = {
         "$out/alacritty/alacritty.toml" =
           if options ? configFile then

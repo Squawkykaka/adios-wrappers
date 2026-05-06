@@ -111,9 +111,6 @@
     assert !(options ? direnvrc && options ? direnvrcFile);
     inputs.mkWrapper {
       inherit (options) package;
-      preSymlink = ''
-        mkdir -p $out/direnv/lib
-      '';
       symlinks = {
         "$out/direnv/direnv.toml" =
           if options ? configFile then

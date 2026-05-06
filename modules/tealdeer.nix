@@ -45,9 +45,6 @@
     inputs.mkWrapper {
       inherit (options) package;
       binaryPath = "$out/bin/tldr";
-      preSymlink = ''
-        mkdir -p $out/tealdeer-config
-      '';
       symlinks = {
         "$out/tealdeer-config/config.toml" =
           if options ? configFile then

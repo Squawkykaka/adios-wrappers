@@ -166,10 +166,6 @@
     assert !(options ? initLua && options ? initLuaFile);
     inputs.mkWrapper {
       inherit (options) package;
-      preSymlink = ''
-        mkdir -p $out/yazi/plugins
-        mkdir -p $out/yazi/flavors
-      '';
       symlinks = {
         "$out/yazi/yazi.toml" =
           if options ? settingsFile then

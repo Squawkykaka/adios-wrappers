@@ -41,9 +41,6 @@
     inputs.mkWrapper {
       inherit (options) package;
       binaryPath = "$out/libexec/xdg-desktop-portal-termfilechooser";
-      preSymlink = ''
-        mkdir -p $out/xdg-desktop-portal-termfilechooser
-      '';
       symlinks = {
         "$out/xdg-desktop-portal-termfilechooser/config" =
           if options ? configFile then

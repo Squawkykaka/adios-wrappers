@@ -85,9 +85,6 @@
     inputs.mkWrapper {
       inherit (options) package;
       name = "mango";
-      preSymlink = ''
-        mkdir -p $out/mango
-      '';
       symlinks = {
         "$out/mango/config.conf" =
           if options ? configFile then

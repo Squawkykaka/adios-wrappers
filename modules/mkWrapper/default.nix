@@ -35,17 +35,6 @@ in {
       description = "Path within the input derivation to the binary which should be wrapped";
       defaultFunc = { options }: "$out/bin/${options.name}";
     };
-
-    preSymlink = {
-      type = nullOr types.string;
-      description = ''
-        Commands to be run before the symlinking process in the build steps. Commonly used to create a directory in which the symlinks will be placed.
-      '';
-      default = null;
-      example = ''
-        mkdir -p $out/foo-config
-      '';
-    };
     preWrap = {
       type = nullOr types.string;
       description = "Commands to be run before the wrapping process in the build steps.";
@@ -56,7 +45,6 @@ in {
       description = "Commands to be run after the wrapping process in the build steps.";
       default = null;
     };
-
     wrapperArgs = {
       type = nullOr types.string;
       description = "Extra args passed directly to wrapProgram.";
@@ -128,7 +116,10 @@ in {
           if destination == null then
             []
           else
-            [ "ln -s ${destination} ${symlink}" ]
+            [
+              "mkdir -p $(dirname ${symlink})"
+              "ln -s ${destination} ${symlink}"
+            ]
         ) (attrNames options.symlinks)
       );
       flagsStr = concatStringsSep " " (map (flag: "--add-flag \"${flag}\"") options.flags);
@@ -154,7 +145,6 @@ in {
         for i in $(cat $pathsPath); do
           ${lndir}/bin/lndir -silent $i $out
         done
-        ${ifNotNull options.preSymlink}
         ${symlinkedStr}
         ${ifNotNull options.preWrap}
         ${

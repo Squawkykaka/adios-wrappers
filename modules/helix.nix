@@ -116,9 +116,6 @@
     inputs.mkWrapper {
       inherit (options) package;
       binaryPath = "$out/bin/hx";
-      preSymlink = ''
-        mkdir -p $out/helix/themes
-      '';
       symlinks = {
         "$out/helix/config.toml" =
           if options ? configFile then

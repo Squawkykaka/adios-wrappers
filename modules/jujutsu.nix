@@ -56,9 +56,6 @@
     inputs.mkWrapper {
       inherit (options) package;
       binaryPath = "$out/bin/jj";
-      preSymlink = ''
-        mkdir -p $out/jj-config
-      '';
       symlinks = {
         "$out/jj-config/config.toml" =
           if options ? configFile then

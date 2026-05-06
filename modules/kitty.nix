@@ -89,9 +89,6 @@
     assert !(options ? theme && options ? themeFile);
     inputs.mkWrapper {
       inherit (options) package;
-      preSymlink = ''
-        mkdir -p $out/kitty
-      '';
       symlinks = {
         "$out/kitty/kitty.conf" =
           if options ? configFile then

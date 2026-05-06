@@ -51,9 +51,6 @@
     assert !(options ? themeConfig && options ? themeFile);
     inputs.mkWrapper {
       inherit (options) package flags;
-      preSymlink = ''
-        mkdir -p $out/eza-config
-      '';
       symlinks = {
         "$out/eza-config/theme.yml" =
           if options ? themeFile then

@@ -79,9 +79,6 @@
     else
       inputs.mkWrapper {
         inherit (options) package;
-        preSymlink = ''
-          mkdir -p $out/gh
-        '';
         symlinks = {
           "$out/gh/config.yml" =
             if options ? settings then
