@@ -9,6 +9,8 @@ in {
     packages = [
       nixfmt
       pkgs.npins
+      pkgs.jq
+      pkgs.ndg
     ];
   };
 }
