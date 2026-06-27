@@ -1,1044 +1,3145 @@
 {
-  "alacritty": {
-    "configFile": {
-      "description": "`alacritty.toml` file to be injected into the wrapped package. See the alacritty documentation: https://alacritty.org/config-alacritty.html Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The alacritty package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `alacritty.toml`. See the alacritty documentation: https://alacritty.org/config-alacritty.html Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "alacritty.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/alacritty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/alacritty.nix"
+      }
+    ],
+    "description": "`alacritty.toml` file to be injected into the wrapped package.\n\nSee the alacritty documentation:\nhttps://alacritty.org/config-alacritty.html\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "alacritty",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "bat": {
-    "configFile": {
-      "description": "File containing the flags to be appended by default when running bat. Disjoint with the `flags` option.",
-      "type": "pathLike"
-    },
-    "flags": {
-      "description": "Flags to be appended by default when running bat. Disjoint with the `configFile` option.",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The bat package to be wrapped.",
-      "type": "derivation"
-    }
+  "alacritty.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/alacritty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/alacritty.nix"
+      }
+    ],
+    "description": "The alacritty package to be wrapped.",
+    "loc": [
+      "alacritty",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "bottom": {
-    "configFile": {
-      "description": "`bottom.toml` file to be injected into the wrapped package. See the bottom documentation for valid options: https://bottom.pages.dev/nightly/configuration/config-file/ Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The bottom package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `bottom.toml`. See the bottom documentation for valid options: https://bottom.pages.dev/nightly/configuration/config-file/ Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "alacritty.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/alacritty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/alacritty.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `alacritty.toml`.\n\nSee the alacritty documentation:\nhttps://alacritty.org/config-alacritty.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "alacritty",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "btop": {
-    "configFile": {
-      "description": "`btop.conf` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/aristocratos/btop#configurability Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The btop package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `btop.conf`. See the documentation for valid options: https://github.com/aristocratos/btop#configurability Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "bat.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/bat.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/bat.nix"
+      }
+    ],
+    "description": "File containing the flags to be appended by default when running bat.\n\nDisjoint with the `flags` option.\n",
+    "loc": [
+      "bat",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "diff-so-fancy": {
-    "package": {
-      "description": "The diff-so-fancy package to be wrapped.",
-      "type": "derivation"
-    }
+  "bat.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/bat.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/bat.nix"
+      }
+    ],
+    "description": "Flags to be appended by default when running bat.\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "bat",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
   },
-
-  "direnv": {
-    "configFile": {
-      "description": "`direnv.toml` file to be injected into the wrapped package. See the direnv documentation for valid options: {manpage}`direnv.toml(1)`. Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "direnvrc": {
-      "description": "Custom direnvrc definition to be injected into the wrapped packages `direnvrc` The syntax is described at: https://direnv.net/#the-stdlib",
-      "type": "string"
-    },
-    "direnvrcFile": {
-      "description": "`direnvrc` file to be copied into the wrapped package. The syntax is described at: https://direnv.net/#the-stdlib",
-      "type": "string"
-    },
-    "package": {
-      "description": "The direnv package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `direnv.toml`. See the direnv docs for valid options: {manpage}`direnv.toml(1)`. Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "bat.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/bat.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/bat.nix"
+      }
+    ],
+    "description": "The bat package to be wrapped.",
+    "loc": [
+      "bat",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "discordo": {
-    "configFile": {
-      "description": "`config.toml` file to be injected into the wrapped package. See the default configuration for valid options: https://github.com/ayn2op/discordo/blob/main/internal/config/config.toml Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "flags": {
-      "default": [],
-      "description": "Flags to be automatically appended when running discordo.",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The discordo package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's 'config.toml'. See the default configuration for valid options: https://github.com/ayn2op/discordo/blob/main/internal/config/config.toml Disjoint with the `configFile` option.",
-      "type": "attrs"
-    },
-    "tokenFile": {
-      "description": "A file containing a discord token which is read at runtime and injected into the wrapped package's environment. I recommend using a solution like [sops-nix](https://github.com/Mic92/sops-nix) or [agenix](https://github.com/ryantm/agenix) to encrypt your token.",
-      "type": "pathLike"
-    }
+  "bottom.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/bottom.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/bottom.nix"
+      }
+    ],
+    "description": "`bottom.toml` file to be injected into the wrapped package.\n\nSee the bottom documentation for valid options:\nhttps://bottom.pages.dev/nightly/configuration/config-file/\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "bottom",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "dunst": {
-    "configContents": {
-      "description": "Settings to be injected into the wrapped package's `dunstrc`. See the documentation for syntax and valid options: https://dunst-project.org/documentation/ Disjoint with the `configFile` option.",
-      "type": "string"
-    },
-    "configFile": {
-      "description": "`dunstrc` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://dunst-project.org/documentation/ Disjoint with the `configContents` option.",
-      "type": "pathLike"
-    },
-    "dropinFiles": {
-      "description": "`*.conf` files to be injected into the wrapped package alongside the main configuration. See the documentation for syntax and valid options: https://dunst-project.org/documentation/dunst/#FILES",
-      "type": "listOf<pathLike>"
-    },
-    "package": {
-      "description": "The dunst package to be wrapped.",
-      "type": "derivation"
-    }
+  "bottom.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/bottom.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/bottom.nix"
+      }
+    ],
+    "description": "The bottom package to be wrapped.",
+    "loc": [
+      "bottom",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "eza": {
-    "flags": {
-      "description": "Flags to be appended by default when running eza.",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The eza package to be wrapped.",
-      "type": "derivation"
-    },
-    "theme": {
-      "description": "Settings to be injected into the wrapped package's `theme.yml`. See `https://github.com/eza-community/eza/blob/main/man/eza_colors-explanation.5.md` for valid options Disjoint with the `themeFile` option.",
-      "type": "attrs"
-    },
-    "themeFile": {
-      "description": "`theme.yml` file to be injected into the wrapped package. See `https://github.com/eza-community/eza/blob/main/man/eza_colors-explanation.5.md` for valid options Disjoint with the `theme` option.",
-      "type": "pathLike"
-    }
+  "bottom.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/bottom.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/bottom.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `bottom.toml`.\n\nSee the bottom documentation for valid options:\nhttps://bottom.pages.dev/nightly/configuration/config-file/\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "bottom",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "fastfetch": {
-    "configFile": {
-      "description": "`config.jsonc` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/fastfetch-cli/fastfetch/wiki/Configuration Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The fastfetch package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.jsonc`. See the documentation for valid options: https://github.com/fastfetch-cli/fastfetch/wiki/Configuration Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "btop.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/btop.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/btop.nix"
+      }
+    ],
+    "description": "`btop.conf` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/aristocratos/btop#configurability\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "btop",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "firefox": {
-    "autoConfigFiles": {
-      "description": "`autoconfig.js` files to be injected into the wrapped package. See the Firefox documentation: https://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig",
-      "type": "listOf<pathLike>"
-    },
-    "package": {
-      "description": "The Firefox package to be wrapped. Note that this should use a `-unwrapped` variant.",
-      "type": "derivation"
-    },
-    "policies": {
-      "description": "Policies to be injected into the wrapped package. `policies.Preferences` can be used to inject preferences. Disjoint with the `policiesFiles` option.",
-      "type": "attrs"
-    },
-    "policiesFiles": {
-      "description": "JSON files containing policies to be injected into the wrapped package. To inject preferences, code like this can be used: ```json {   \"policies\": {     \"Preferences\": {       \"YOUR_PREFERENCES\": \"here\"     }   } } ``` See the Firefox documentation: https://support.mozilla.org/en-US/kb/customizing-firefox-using-policiesjson Disjoint with the `policies` option.",
-      "type": "listOf<pathLike>"
-    }
+  "btop.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/btop.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/btop.nix"
+      }
+    ],
+    "description": "The btop package to be wrapped.",
+    "loc": [
+      "btop",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "fish": {
-    "abbreviations": {
-      "description": "Custom abbreviations to be injected into the wrapped package. When mutating this option, a special API is provided. In this API, each attribute maps an abbreviation to its expansion. The values can either be: - a normal string with no extra logic - a special struct, allowing abbrs to set the location of the cursor on expansion - a list, allowing abbrs to only expand when the commandline starts with a given command See the example for a demo.",
-      "example": {
-        "c": "git commit",
-        "git": [
-          {
-            "m": "merge"
-          },
-          {
-            "rbi": {
-              "expansion": "rebase -i HEAD~%",
-              "setCursor": true
-            }
-          }
-        ],
-        "s": "git status"
-      },
-      "mutatorType": "attrsOf<union<abbr,listOf<attrsOf<abbr>>>>",
-      "type": "string"
-    },
-    "completions": {
-      "description": "Custom completions to be injected into the wrapped package. Each attribute should map the name of a command to inline fish script defining how the command should be completed. Disjoint with the `completionFiles` option.",
-      "type": "attrsOf<string>"
-    },
-    "completionsFiles": {
-      "description": "Files containing custom completions to be injected into the wrapped package. Disjoint with the `completions` option.",
-      "mutatorType": "listOf<pathLike>",
-      "type": "listOf<pathLike>"
-    },
-    "functions": {
-      "description": "Custom functions to be injected into the wrapped package. Each attribute should map the name of a function to inline fish script defining its functionality. Disjoint with the `functionsFiles` option.",
-      "type": "attrsOf<string>"
-    },
-    "functionsFiles": {
-      "description": "Files containing custom functions to be injected into the wrapped package. Disjoint with the `functions` option.",
-      "mutatorType": "listOf<pathLike>",
-      "type": "listOf<pathLike>"
-    },
-    "interactiveShellInit": {
-      "description": "Shell initialization code to be automatically injected into the wrapped package. Only ran when Fish is initialized interactively.",
-      "mutatorType": "string",
-      "type": "string"
-    },
-    "package": {
-      "description": "The Fish package to be wrapped.",
-      "type": "derivation"
-    }
+  "btop.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/btop.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/btop.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `btop.conf`.\n\nSee the documentation for valid options:\nhttps://github.com/aristocratos/btop#configurability\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "btop",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "fuzzel": {
-    "configFile": {
-      "description": "`fuzzel.ini` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.ini.5.scd Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "dmenuFlags": {
-      "description": "Dmenu related flags to pass to fuzzel when using `settings`/`configFile` See the documentation for valid syntax and formatting of the related flags: https://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.1.scd Requires that either `settings`/`configFile` be set.",
-      "type": "dmenuFlags"
-    },
-    "logFlags": {
-      "description": "Logging related flags to pass to fuzzel when using `settings`/`configFile` See the documentation for valid syntax and formatting of the related flags: https://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.1.scd Requires that either `settings`/`configFile` be set.",
-      "type": "logFlags"
-    },
-    "package": {
-      "description": "The fuzzel package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `fuzzel.ini`. See the documentation for valid options: https://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.ini.5.scd Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "diff-so-fancy.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/diff-so-fancy.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/diff-so-fancy.nix"
+      }
+    ],
+    "description": "The diff-so-fancy package to be wrapped.",
+    "loc": [
+      "diff-so-fancy",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "gh": {
-    "configDir": {
-      "description": "Folder containing gh configuration files to be injected into the wrapped package. This folder should contain a `config.yml` and/or a `hosts.yml`. Disjoint with the `settings` and `hosts` options.",
-      "type": "pathLike"
-    },
-    "hosts": {
-      "description": "Host information to be injected into the wrapped package's `hosts.yml`. Disjoint with the `configDir` option.",
-      "type": "attrs"
-    },
-    "package": {
-      "description": "The gh package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.yml`. See the documentation: https://cli.github.com/manual/gh_config Disjoint with the `configDir` option.",
-      "type": "attrs"
-    }
+  "direnv.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/direnv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/direnv.nix"
+      }
+    ],
+    "description": "`direnv.toml` file to be injected into the wrapped package.\n\nSee the direnv documentation for valid options:\n{manpage}`direnv.toml(1)`.\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "direnv",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "git": {
-    "configFile": {
-      "description": "`gitconfig` file to be injected into the wrapped package. See the git documentation on the syntax of this file: https://git-scm.com/docs/git-config#_configuration_file And the documentation on valid options: https://git-scm.com/docs/git-config#_variables Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "ignoreFile": {
-      "description": "File containing extra path globs to be ignored automatically, along with the repo-specific `.gitignore`. Disjoint with the `ignoredPaths` option.",
-      "type": "pathLike"
-    },
-    "ignoredPaths": {
-      "description": "Extra path globs to be ignored automatically, along with the repo-specific `.gitignore`. Disjoint with the `ignoreFile` option.",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The git package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `gitconfig`. See the git documentation for valid options: https://git-scm.com/docs/git-config#_variables Disjoint with the `configFile` option.",
-      "mutatorType": "attrs",
-      "type": "attrs"
-    }
+  "direnv.direnvrc": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/direnv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/direnv.nix"
+      }
+    ],
+    "description": "Custom direnvrc definition to be injected into the wrapped packages `direnvrc`\n\nThe syntax is described at:\nhttps://direnv.net/#the-stdlib\n",
+    "loc": [
+      "direnv",
+      "direnvrc"
+    ],
+    "readOnly": false,
+    "type": "string"
   },
-
-  "gitui": {
-    "keybinds": {
-      "description": "Keybind overrides to be injected into the wrapped package's `key_bindings.ron`. Each attrset in the optionAttrsets are converted to RON in this manner: `${action_name} = { char = \"x\"; mod = \"y\"; }; => action: Some(( code: x, modifiers: y))` Where `action_name` is a valid [Gitui action](https://github.com/gitui-org/gitui/blob/master/src/keys/key_list.rs#L83), `char` is an *optional* valid [Crossterm KeyCode](https://docs.rs/crossterm/latest/crossterm/event/enum.KeyCode.html) and `mod` is an *optional* valid [Crossterm Modifier](https://docs.rs/crossterm/latest/crossterm/event/struct.KeyModifiers.html) An action that does not set either `char` or `mod` disables the keybind. For more information on how `key_bindings.ron` is formatted and used: https://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md Disjoint with the `keybindsFile` option.",
-      "example": {
-        "branch_find": {},
-        "commit_amend": {
-          "char": "Char('A')",
-          "mod": "SHIFT"
-        },
-        "move_left": {
-          "char": "Char('h')"
-        }
-      },
-      "type": "attrsOf<keybind>"
-    },
-    "keybindsFile": {
-      "description": "`key_bindings.ron` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md#key-config Disjoint with the `keybinds` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The gitui package to be wrapped.",
-      "type": "derivation"
-    },
-    "symbols": {
-      "description": "Key symbol overrides to be injected into the wrapped package's `key_symbols.ron`. Each attrset pair is converted to RON in this manner: `{ ${key} = symbol }; => key: Some(symbol)` Where `key` is a valid [Gitui KeySymbol](https://github.com/gitui-org/gitui/blob/master/src/keys/symbols.rs), and `char` is a valid character string. For more information on how `key_bindings.ron` is formatted and used: https://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md#key-symbols Disjoint with the `symbolsFile` option.",
-      "example": {
-        "page_down": "▼"
-      },
-      "type": "attrsOf<string>"
-    },
-    "symbolsFile": {
-      "description": "`key_symbols.ron` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md#key-symbols Disjoint with the `symbols` option.",
-      "type": "pathLike"
-    },
-    "syntaxFiles": {
-      "description": "Files containing .thTheme syntax files that can be loaded by `theme.ron` See the documentation for loading `.thTheme` files in `theme.ron`: https://github.com/gitui-org/gitui/blob/master/THEMES.md",
-      "type": "listOf<pathLike>"
-    },
-    "theme": {
-      "description": "Theme overrides to be injected into the wrapped package's `theme.ron`. Each attrset pair is converted to RON in this manner: `{ ${element} = color; }; => element: Some(\"color\")` Where `element` is a valid [Gitui style element](https://github.com/gitui-org/gitui/blob/master/src/ui/style.rs#L305) and `color` is a valid hex string (\"#FFFFFF\") or [Ratatui color](https://docs.rs/crossterm/latest/crossterm/event/struct.KeyModifiers.html) For more information on how `key_bindings.ron` is formatted and used: https://github.com/gitui-org/gitui/blob/master/THEMES.md Disjoint with the `themeFile` option.",
-      "example": {
-        "selection_bg": "Blue",
-        "selection_fg": "#ffffff"
-      },
-      "type": "attrsOf<string>"
-    },
-    "themeFile": {
-      "description": "`theme.ron` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/gitui-org/gitui/blob/master/THEMES.md Disjoint with the `theme` option.",
-      "type": "pathLike"
-    }
+  "direnv.direnvrcFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/direnv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/direnv.nix"
+      }
+    ],
+    "description": "`direnvrc` file to be copied into the wrapped package.\n\nThe syntax is described at:\nhttps://direnv.net/#the-stdlib\n",
+    "loc": [
+      "direnv",
+      "direnvrcFile"
+    ],
+    "readOnly": false,
+    "type": "string"
   },
-
-  "gnupg": {
-    "configFile": {
-      "description": "`gpg.conf` file to be injected into the wrapped package. See the gnupg manual: https://www.gnupg.org/documentation/manuals/gnupg/GPG-Options.html Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The gnupg package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `gpg.conf`. See the gnupg manual: https://www.gnupg.org/documentation/manuals/gnupg/GPG-Options.html Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "direnv.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/direnv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/direnv.nix"
+      }
+    ],
+    "description": "The direnv package to be wrapped.",
+    "loc": [
+      "direnv",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "helix": {
-    "configFile": {
-      "description": "`config.toml` file to be injected into the wrapped package. See the documentation for valid options: https://docs.helix-editor.com/configuration.html Disjoint with the `config` option.",
-      "type": "pathLike"
-    },
-    "extraPackages": {
-      "description": "Packages to be automatically added to helix's path. Mainly used to set language servers and formatters.",
-      "type": "listOf<derivation>"
-    },
-    "languages": {
-      "description": "Language config to be injected into the wrapped package's `languages.toml`. See the documentation for valid options: https://docs.helix-editor.com/languages.html Disjoint with the `languagesFile` option.",
-      "type": "attrs"
-    },
-    "languagesFile": {
-      "description": "`languages.toml` file to be injected into the wrapped package. See the documentation on valid options: https://docs.helix-editor.com/languages.html Disjoint with the `languages` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The helix package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.toml`. See the documentation: https://docs.helix-editor.com/configuration.html Disjoint with the `configFile` option.",
-      "type": "attrs"
-    },
-    "themeDir": {
-      "description": "Folder containing theme configuration files to be injected into the wrapped package. This folder should contain one or multiple `$theme_name.toml` files. Disjoint with the `themes` option.",
-      "type": "pathLike"
-    },
-    "themes": {
-      "description": "An attrset of custom themes, mapping the name of a theme to its settings. See the documentation for valid options: https://docs.helix-editor.com/themes.html Disjoint with the `themeDir` option.",
-      "type": "attrsOf<attrs>"
-    }
+  "direnv.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/direnv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/direnv.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `direnv.toml`.\n\nSee the direnv docs for valid options:\n{manpage}`direnv.toml(1)`.\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "direnv",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "hydrus": {
-    "clientFlags": {
-      "description": "List of hydrus-client flags to pass to hydrus client on startup. Note that paths passed to db_dir/temp_dir should be writable (not in the nix store) See the documentation for valid syntax and formatting of the related flags: https://hydrusnetwork.github.io/hydrus/launch_arguments.html",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The hydrus package to be wrapped.",
-      "type": "derivation"
-    },
-    "serverFlags": {
-      "description": "List of hydrus-server flags to pass to hydrus server on startup. These flags only apply to hydrus-server, and are not required for basic client-only use, see: https://hydrusnetwork.github.io/hydrus/youDontWantTheServer.html Note that paths passed to db_dir/temp_dir should be writable (not in the nix store) See the documentation for valid syntax and formatting of the related flags: https://hydrusnetwork.github.io/hydrus/launch_arguments.html",
-      "type": "listOf<string>"
-    }
+  "discordo.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/discordo.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/discordo.nix"
+      }
+    ],
+    "description": "`config.toml` file to be injected into the wrapped package.\n\nSee the default configuration for valid options:\nhttps://github.com/ayn2op/discordo/blob/main/internal/config/config.toml\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "discordo",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "hyfetch": {
-    "configFile": {
-      "description": "`hyfetch.json` file to be injected into the wrapped package. Unwrapped hyfetch configurations can be created via: `hyfetch --config-file hyfetch.json --config` Disjoint with the `settings` option.",
-      "type": "pathLike"
+  "discordo.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/discordo.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/discordo.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "[ ]"
     },
-    "package": {
-      "description": "The hyfetch package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `hyfetch.json`. Unwrapped hyfetch configurations can be created via: `hyfetch --config-file hyfetch.json --config` This can then be turned into a nix value: `nix-instantiate --eval -E 'builtins.fromJSON (builtins.readFile ./hyfetch.json)'` Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+    "description": "Flags to be automatically appended when running discordo.\n",
+    "loc": [
+      "discordo",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
   },
-
-  "irssi": {
-    "autoconnect": {
-      "description": "The server to be automatically connected to.",
-      "example": {
-        "password": "hunter2",
-        "port": "6697",
-        "server": "irc.libera.chat"
-      },
-      "type": "autoconnect"
-    },
-    "config": {
-      "description": "The config to be injected into the wrapped package. See the documentation for valid options: https://irssi.org/documentation/settings/ Disjoint with the `configDir` option.",
-      "type": "string"
-    },
-    "configDir": {
-      "description": "The path of `.irssi` to be injected into the wrapped package. See the documentation for valid options: https://irssi.org/documentation/settings/ Disjoint with the `config` option.",
-      "type": "pathLike"
-    },
-    "hostname": {
-      "description": "The default hostname to be injected into the wrapped package.",
-      "type": "string"
-    },
-    "nickname": {
-      "description": "The default nickname to be injected into the wrapped package.",
-      "type": "string"
-    },
-    "package": {
-      "description": "The irssi package to be wrapped.",
-      "type": "derivation"
-    }
+  "discordo.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/discordo.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/discordo.nix"
+      }
+    ],
+    "description": "The discordo package to be wrapped.",
+    "loc": [
+      "discordo",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "jujutsu": {
-    "configFile": {
-      "description": "`config.toml` file to be injected into the wrapped package. See the jujutsu documentation for valid options: https://docs.jj-vcs.dev/latest/config/ Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "extraPackages": {
-      "description": "Packages to be automatically added to jujutsu's path. Can be used to enable 3-pane diff editing by using Meld or diffedit3. See the jujutsu documentation on how to achieve this: https://docs.jj-vcs.dev/latest/config/#experimental-3-pane-diff-editing",
-      "type": "listOf<derivation>"
-    },
-    "package": {
-      "description": "The jujutsu package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.toml`. See the jujutsu documentation for valid options: https://docs.jj-vcs.dev/latest/config/ Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "discordo.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/discordo.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/discordo.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's 'config.toml'.\n\nSee the default configuration for valid options:\nhttps://github.com/ayn2op/discordo/blob/main/internal/config/config.toml\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "discordo",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "kitty": {
-    "configFile": {
-      "description": "`kitty.conf` file to be injected into the wrapped package. See the kitty documentation: https://sw.kovidgoyal.net/kitty/conf.html Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The kitty package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `kitty.conf`. See the kitty documentation: https://sw.kovidgoyal.net/kitty/conf.html Disjoint with the `configFile` option.",
-      "type": "attrs"
-    },
-    "theme": {
-      "description": "Theme name from `pkgs.kitty-themes` to be used. Each of the files in this folder constitute a valid theme: https://github.com/kovidgoyal/kitty-themes/tree/master/themes",
-      "example": "Catppuccin-Mocha",
-      "type": "string"
-    },
-    "themeFile": {
-      "description": "Path containing a Kitty theme to be used.",
-      "type": "pathLike"
-    }
+  "discordo.tokenFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/discordo.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/discordo.nix"
+      }
+    ],
+    "description": "A file containing a discord token which is read at runtime and injected into the wrapped package's environment.\n\nI recommend using a solution like [sops-nix](https://github.com/Mic92/sops-nix) or [agenix](https://github.com/ryantm/agenix) to encrypt your token.\n",
+    "loc": [
+      "discordo",
+      "tokenFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "less": {
-    "configFile": {
-      "description": "`lesskey` file to be injected into the wrapped package. This file doesn't just contain keybinds, but can also set flags with the `#env` section. See the documentation for valid options: https://man7.org/linux/man-pages/man1/lesskey.1.html Disjoint with the `flags` option.",
-      "type": "pathLike"
-    },
-    "flags": {
-      "description": "Flags to be automatically appended when running less. See the documentation for valid options: https://man7.org/linux/man-pages/man1/less.1.html#:~:text=OPTIONS,-top Disjoint with the `configFile` option.",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The less package to be wrapped.",
-      "type": "derivation"
-    }
+  "dunst.configContents": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/dunst.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/dunst.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `dunstrc`.\n\nSee the documentation for syntax and valid options:\nhttps://dunst-project.org/documentation/\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "dunst",
+      "configContents"
+    ],
+    "readOnly": false,
+    "type": "string"
   },
-
-  "mangowc": {
-    "autostartContents": {
-      "description": "Script that get runs on startup, injected into the wrapped packages `autostart.sh` See the mangowc docs for valid options: https://mangowm.github.io/docs/configuration/basics#autostart Disjoint with the `autostartFile` option.",
-      "type": "string"
-    },
-    "autostartFile": {
-      "description": "`autostart.sh` file to be injected into the wrapped package. See the mangowc docs for valid options: https://mangowm.github.io/docs/configuration/basics#autostart Disjoint with the `autostartContents` option.",
-      "type": "pathLike"
-    },
-    "configFile": {
-      "description": "`config.conf` file to be injected into the wrapped package. See the mangowc docs for valid options: https://mangowm.github.io/docs/configuration/basics Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The mangowc package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.conf`. See the mangowc docs for valid options: https://mangowm.github.io/docs/configuration/basics Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "dunst.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/dunst.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/dunst.nix"
+      }
+    ],
+    "description": "`dunstrc` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://dunst-project.org/documentation/\n\nDisjoint with the `configContents` option.\n",
+    "loc": [
+      "dunst",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "mkWrapper": {
-    "binaryPath": {
-      "description": "Path within the input derivation to the binary which should be wrapped",
-      "type": "string"
-    },
-    "environment": {
-      "default": {},
-      "description": "Environment variables to be set during the execution of the wrapped program",
-      "type": "attrsOf<union<null,pathLike,readFromFileAtRuntime>>"
-    },
-    "extraPaths": {
-      "default": [],
-      "description": "Extra derivations which should have their directory structures replicated in the final package.",
-      "type": "listOf<derivation>"
-    },
-    "flags": {
-      "default": [],
-      "description": "Flags to be automatically appended to the wrapped program.",
-      "type": "listOf<string>"
-    },
-    "name": {
-      "description": "The name of the package to be wrapped. This determines the pname of the wrapped package, as well as the derivation to be automatically run when using `nix run`.",
-      "type": "string"
-    },
-    "package": {
-      "description": "The package to be wrapped.",
-      "type": "derivation"
-    },
-    "postWrap": {
-      "default": null,
-      "description": "Commands to be run after the wrapping process in the build steps.",
-      "type": "nullOr<string>"
-    },
-    "preWrap": {
-      "default": null,
-      "description": "Commands to be run before the wrapping process in the build steps.",
-      "type": "nullOr<string>"
-    },
-    "symlinks": {
-      "default": {},
-      "description": "Symlinks to be included in the resulting derivation. Each key specifies the location within the derivation to create the symlink. Each value specifies where the symlink should be directed to.",
-      "type": "attrsOf<nullOr<pathLike>>"
-    },
-    "wrapperArgs": {
-      "default": null,
-      "description": "Extra args passed directly to wrapProgram.",
-      "type": "nullOr<string>"
-    }
+  "dunst.dropinFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/dunst.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/dunst.nix"
+      }
+    ],
+    "description": "`*.conf` files to be injected into the wrapped package alongside the main configuration.\n\nSee the documentation for syntax and valid options:\nhttps://dunst-project.org/documentation/dunst/#FILES\n",
+    "loc": [
+      "dunst",
+      "dropinFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
   },
-
-  "mpv": {
-    "configFile": {
-      "description": "`mpv.conf` file to be injected into the wrapped package. See the manual for syntax and valid options: https://mpv.io/manual/stable/ Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "keybinds": {
-      "description": "Keybinds to be injected into the wrapped package's `input.conf`. See the manual for valid options: https://mpv.io/manual/stable/#input-conf Disjoint with the `keybindsFile` option.",
-      "type": "attrs"
-    },
-    "keybindsFile": {
-      "description": "`input.conf` file to be injected into the wrapped package. See the manual for syntax and valid options: https://mpv.io/manual/stable/#input-conf Disjoint with the `keybinds` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The mpv package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `mpv.conf`. See the manual for valid options: https://mpv.io/manual/stable/ Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "dunst.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/dunst.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/dunst.nix"
+      }
+    ],
+    "description": "The dunst package to be wrapped.",
+    "loc": [
+      "dunst",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "niri": {
-    "configFile": {
-      "description": "`config.kdl` file to be injected into the wrapped package. See the niri documentation for syntax and valid options: https://github.com/niri-wm/niri/wiki/Configuration:-Introduction",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The niri package to be wrapped.",
-      "type": "derivation"
-    }
+  "eza.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/eza.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/eza.nix"
+      }
+    ],
+    "description": "Flags to be appended by default when running eza.\n",
+    "loc": [
+      "eza",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
   },
-
-  "nixpkgs": {
-    "lib": {
-      "type": "attrs"
-    },
-    "pkgs": {
-      "type": "attrs"
-    }
+  "eza.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/eza.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/eza.nix"
+      }
+    ],
+    "description": "The eza package to be wrapped.",
+    "loc": [
+      "eza",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "nushell": {
-    "extraPackages": {
-      "description": "Runtime dependencies to be injected into the wrapped package's path.",
-      "mutatorType": "listOf<derivation>",
-      "type": "listOf<derivation>"
-    },
-    "package": {
-      "description": "The nushell package to be wrapped.",
-      "type": "derivation"
-    },
-    "shellInit": {
-      "description": "Shell initialisation code to be injected into the wrapped package's `config.nu`. See the nushell documentation for valid options: https://www.nushell.sh/book/configuration.html",
-      "mutatorType": "string",
-      "type": "string"
-    },
-    "sourceFiles": {
-      "description": "A list of paths to source in the `config.nu` file. This can be used to import extra files, and can be used with impurity",
-      "mutatorType": "listOf<pathLike>",
-      "type": "listOf<pathLike>"
-    }
+  "eza.theme": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/eza.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/eza.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `theme.yml`.\n\nSee `https://github.com/eza-community/eza/blob/main/man/eza_colors-explanation.5.md` for valid options\n\nDisjoint with the `themeFile` option.\n",
+    "loc": [
+      "eza",
+      "theme"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "ripgrep": {
-    "configFile": {
-      "description": "`ripgreprc` file, containing flags to be automatically appended when running ripgrep. See the documentation of valid flags: https://manpages.ubuntu.com/manpages/jammy/man1/rg.1.html#:~:text=OPTIONS This file should have each flag on its own line. See the documentation of the file's format: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file Disjoint with the `configFile` option.",
-      "type": "pathLike"
-    },
-    "flags": {
-      "description": "Flags to be automatically appended when running ripgrep. See the documentation of valid flags: https://manpages.ubuntu.com/manpages/jammy/man1/rg.1.html#:~:text=OPTIONS Disjoint with the `configFile` option.",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The ripgrep package to be wrapped.",
-      "type": "derivation"
-    }
+  "eza.themeFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/eza.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/eza.nix"
+      }
+    ],
+    "description": "`theme.yml` file to be injected into the wrapped package.\n\nSee `https://github.com/eza-community/eza/blob/main/man/eza_colors-explanation.5.md` for valid options\n\nDisjoint with the `theme` option.\n",
+    "loc": [
+      "eza",
+      "themeFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "satty": {
-    "configFile": {
-      "description": "`config.toml` file to be injected into the wrapped package. See the Satty documentation for syntax and valid options: https://github.com/Satty-org/Satty#configuration-file Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The Satty package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.toml`. See the Satty documentation for valid options: https://github.com/Satty-org/Satty#configuration-file Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "fastfetch.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fastfetch.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fastfetch.nix"
+      }
+    ],
+    "description": "`config.jsonc` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/fastfetch-cli/fastfetch/wiki/Configuration\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "fastfetch",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
   },
-
-  "starship": {
-    "configFile": {
-      "description": "`starship.toml` file to be injected into the wrapped package. See the documentation for valid options: https://starship.rs/config/ Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The starship package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `starship.toml`. See the documentation for valid options: https://starship.rs/config/ Disjoint with the `configFile` option.",
-      "type": "attrs"
-    },
-    "wrapperAttrs": {
-      "description": "Attributes to be passed directly to the wrapped package's `mkWrapper` call. This is primarily an implementation detail of how the git module mutates the starship wrapper. Setting or mutating it yourself isn't recommended.",
-      "mutatorType": "attrs",
-      "mutators": [],
-      "type": "attrs"
-    }
+  "fastfetch.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fastfetch.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fastfetch.nix"
+      }
+    ],
+    "description": "The fastfetch package to be wrapped.",
+    "loc": [
+      "fastfetch",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "swaybg": {
-    "backgroundImage": {
-      "description": "Path to the background image to be displayed by the wrapped package.",
-      "type": "pathLike"
-    },
-    "color": {
-      "description": "Hex formatted background color to be displayed by the wrapped package.",
-      "example": "ffffff",
-      "type": "string"
-    },
-    "outputName": {
-      "description": "Name of the output to be used by the wrapped package.",
-      "example": "eDP-1",
-      "type": "string"
-    },
-    "package": {
-      "description": "The swaybg package to be wrapped.",
-      "type": "derivation"
-    },
-    "scalingMode": {
-      "description": "Mode to determine how the wrapped package scales images. See the documentation for valid modes: https://man.archlinux.org/man/extra/swaybg/swaybg.1.en#OPTIONS",
-      "type": "string"
-    }
+  "fastfetch.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fastfetch.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fastfetch.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.jsonc`.\n\nSee the documentation for valid options:\nhttps://github.com/fastfetch-cli/fastfetch/wiki/Configuration\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "fastfetch",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "swayidle": {
-    "configContents": {
-      "description": "Settings to be injected into the wrapped package's `config` file. See the documentation for valid options: https://man.archlinux.org/man/swayidle.1 Disjoint with the `configFile` option.",
-      "type": "string"
-    },
-    "configFile": {
-      "description": "`config` file to be injected into the wrapped package. See the documentation for valid options: https://man.archlinux.org/man/swayidle.1 Disjoint with the `configContents` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The swayidle package to be wrapped.",
-      "type": "derivation"
-    },
-    "seatName": {
-      "description": "The seat name to be injected into the wrapped package's flags.",
-      "type": "string"
-    }
+  "firefox.autoConfigFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/firefox.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/firefox.nix"
+      }
+    ],
+    "description": "`autoconfig.js` files to be injected into the wrapped package.\n\nSee the Firefox documentation:\nhttps://support.mozilla.org/en-US/kb/customizing-firefox-using-autoconfig\n",
+    "loc": [
+      "firefox",
+      "autoConfigFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
   },
-
-  "tealdeer": {
-    "configFile": {
-      "description": "`config.toml` file to be injected into the wrapped package. See the tealdeer documentation: https://tealdeer-rs.github.io/tealdeer/config.html Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The tealdeer package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.toml`. See the tealdeer documentation: https://tealdeer-rs.github.io/tealdeer/config.html Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "firefox.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/firefox.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/firefox.nix"
+      }
+    ],
+    "description": "The Firefox package to be wrapped.\nNote that this should use a `-unwrapped` variant.\n",
+    "loc": [
+      "firefox",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
   },
-
-  "termfilechooser": {
-    "configFile": {
-      "description": "Configuration file to be injected into the wrapped package. See the termfilechooser documentation for valid options: https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser#configuration",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The xdg-desktop-portal-termfilechooser package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's configuration file. See the termfilechooser documentation for valid options: https://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser#configuration",
-      "type": "attrs"
-    }
+  "firefox.policies": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/firefox.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/firefox.nix"
+      }
+    ],
+    "description": "Policies to be injected into the wrapped package.\n\n`policies.Preferences` can be used to inject preferences.\n\nDisjoint with the `policiesFiles` option.\n",
+    "loc": [
+      "firefox",
+      "policies"
+    ],
+    "readOnly": false,
+    "type": "attrs"
   },
-
-  "waybar": {
-    "barStyle": {
-      "description": "CSS to be injected into the wrapped package's `style.css`. See the documentation for writing waybar themes: https://github.com/Alexays/Waybar/wiki/Styling Disjoint with the `cssFile` option.",
-      "type": "string"
-    },
-    "configFile": {
-      "description": "`config.jsonc` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/Alexays/Waybar/wiki/Configuration Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "cssFile": {
-      "description": "`style.css` file to be injected into the wrapped package. See the documentation for writing waybar themes: https://github.com/Alexays/Waybar/wiki/Styling Live reloading of themes can be accomplished with an impure path and options.interactiveEnv set to true. Disjoint with the `barStyle` option.",
-      "type": "pathLike"
-    },
-    "interactiveEnv": {
-      "description": "Sets GTK_DEBUG=interactive to launch the wrapped package with the GTK CSS Inspector. See the documentation for use of the inspection tool: https://developer.gnome.org/documentation/tools/inspector.html Can be used with an impure path in options.cssFile to enable live theme reloading.",
-      "type": "bool"
-    },
-    "package": {
-      "description": "The waybar package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `config.jsonc`. See the documentation for valid options: https://github.com/Alexays/Waybar/wiki/Configuration Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "firefox.policiesFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/firefox.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/firefox.nix"
+      }
+    ],
+    "description": "JSON files containing policies to be injected into the wrapped package.\n\nTo inject preferences, code like this can be used:\n```json\n{\n  \"policies\": {\n    \"Preferences\": {\n      \"YOUR_PREFERENCES\": \"here\"\n    }\n  }\n}\n```\n\nSee the Firefox documentation:\nhttps://support.mozilla.org/en-US/kb/customizing-firefox-using-policiesjson\n\nDisjoint with the `policies` option.\n",
+    "loc": [
+      "firefox",
+      "policiesFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
   },
-
-  "wezterm": {
-    "configContents": {
-      "description": "Lua configuration to be injected into the wrapped package's `wezterm.lua`. See the documentation for valid options: https://wezterm.org/config/lua/general.html Disjoint with the `configFile` option.",
-      "type": "string"
+  "fish.abbreviations": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "Custom abbreviations to be injected into the wrapped package.\n\nWhen mutating this option, a special API is provided.\nIn this API, each attribute maps an abbreviation to its expansion.\nThe values can either be:\n- a normal string with no extra logic\n- a special struct, allowing abbrs to set the location of the cursor on expansion\n- a list, allowing abbrs to only expand when the commandline starts with a given command\nSee the example for a demo.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  c = \"git commit\";\n  git = [\n    {\n      m = \"merge\";\n    }\n    {\n      rbi = {\n        expansion = \"rebase -i HEAD~%\";\n        setCursor = true;\n      };\n    }\n  ];\n  s = \"git status\";\n}"
     },
-    "configFile": {
-      "description": "`wezterm.lua` file to be injected into the wrapped package. See the documentation for valid options: https://wezterm.org/config/lua/general.html Disjoint with the `configContents` option.",
-      "type": "pathLike"
-    },
-    "configModules": {
-      "description": "Files containing .lua configuration modules to be injected into the wrapped package. See the documentation to learn how to refer to modules in your wezterm.lua file: https://wezterm.org/config/files.html?h=modules#making-your-own-lua-modules",
-      "type": "listOf<pathLike>"
-    },
-    "package": {
-      "description": "The wezterm package to be wrapped.",
-      "type": "derivation"
-    }
+    "loc": [
+      "fish",
+      "abbreviations"
+    ],
+    "readOnly": false,
+    "type": "string"
   },
-
-  "wiremix": {
-    "configFile": {
-      "description": "`wiremix.toml` file to be injected into the wrapped package. See the documentation for syntax and valid options: https://github.com/tsowell/wiremix/blob/main/wiremix.toml Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The wiremix package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `wiremix.toml`. See the documentation for syntax and valid options: https://github.com/tsowell/wiremix/blob/main/wiremix.toml Disjoint with the `configFile` option.",
-      "type": "attrs"
-    }
+  "fish.completions": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "Custom completions to be injected into the wrapped package.\n\nEach attribute should map the name of a command to inline fish script defining how the command should be completed.\n\nDisjoint with the `completionFiles` option.\n",
+    "loc": [
+      "fish",
+      "completions"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<string>"
   },
-
-  "yazi": {
-    "extraPackages": {
-      "description": "Packages to be automatically added as Yazi dependencies. This defaults to the optionalDeps of the Yazi package in nixpkgs, set here: https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/ya/yazi/package.nix#L8 The dependency `File` is added regardless of the content of this option, because it's non-optional. See the Yazi docs on this topic: https://yazi-rs.github.io/docs/installation",
-      "type": "listOf<derivation>"
-    },
-    "flavors": {
-      "description": "Attribute set of flavors to be injected into the wrapped package. Each attribute should map the name of a flavor (suffixed with `.yazi`) to the path or derivation containing the flavor's contents.",
-      "type": "attrsOf<pathLike>"
-    },
-    "initLua": {
-      "description": "Lua script to be injected into the wrapped package's `init.lua`. See the documentation on how to use the Yazi API: https://yazi-rs.github.io/docs/plugins/overview Disjoint with the `initLuaFile` option.",
-      "type": "string"
-    },
-    "initLuaFile": {
-      "description": "`init.lua` file to be injected into the wrapped package. See the documentation on how to use the Yazi API: https://yazi-rs.github.io/docs/plugins/overview Disjoint with the `initLua` option.",
-      "type": "pathLike"
-    },
-    "keymap": {
-      "description": "Keybinds injected into the wrapped package's `keymap.toml`. See the documentation for valid options: https://yazi-rs.github.io/docs/configuration/keymap Disjoint with the `keymapFile` option.",
-      "type": "attrs"
-    },
-    "keymapFile": {
-      "description": "`keymap.toml` file to be injected into the wrapped package. See the documentation for valid options: https://yazi-rs.github.io/docs/configuration/keymap Disjoint with the `keymap` option.",
-      "type": "pathLike"
-    },
-    "package": {
-      "description": "The yazi package to be wrapped. Note that this should use a `-unwrapped` variant.",
-      "type": "derivation"
-    },
-    "plugins": {
-      "description": "Attribute set of plugins to be injected into the wrapped package. Each attribute should map the name of a plugin (suffixed with `.yazi`) to the path or derivation containing the plugin's contents.",
-      "type": "attrsOf<pathLike>"
-    },
-    "settings": {
-      "description": "Settings to be injected into the wrapped package's `yazi.toml`. See the documentation for valid options: https://yazi-rs.github.io/docs/configuration/yazi Disjoint with the `settingsFile` option.",
-      "type": "attrs"
-    },
-    "settingsFile": {
-      "description": "`yazi.toml` file to be injected into the wrapped package. See the documentation for valid options: https://yazi-rs.github.io/docs/configuration/yazi Disjoint with the `settings` option.",
-      "type": "pathLike"
-    },
-    "theme": {
-      "description": "Theme settings to be injected into the wrapped package's `theme.toml`. See the documentation for valid options: https://yazi-rs.github.io/docs/configuration/theme/ Disjoint with the `themeFile` option.",
-      "type": "attrs"
-    },
-    "themeFile": {
-      "description": "`theme.toml` file to be injected into the wrapped package. See the documentation for valid options: https://yazi-rs.github.io/docs/configuration/theme/ Disjoint with the `theme` option.",
-      "type": "pathLike"
-    }
+  "fish.completionsFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "Files containing custom completions to be injected into the wrapped package.\n\nDisjoint with the `completions` option.\n",
+    "loc": [
+      "fish",
+      "completionsFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
   },
-
-  "zathura": {
-    "keybinds": {
-      "description": "Keybindings to be injected into the wrapped package's `zathurarc`. See the zathurarc documentation for the full list of possible mappings: {manpage}`zathurarc(5)`. You can create a mode-specific mapping by specifying the mode before the key: `\"[normal] <C-b>\" = \"scroll left\";`. Disjoint with the `sourceFiles` option.",
-      "example": {
-        "<Right>": "navigate next",
-        "D": "toggle_page_mode",
-        "[fullscreen] <C-i>": "zoom in"
-      },
-      "mutatorType": "attrs",
-      "type": "attrs"
-    },
-    "package": {
-      "description": "The zathura package to be wrapped.",
-      "type": "derivation"
-    },
-    "settings": {
-      "description": "Options to be injected into the wrapped package's `zathurarc`. See the zathurarc documentation for the full list of options: {manpage}`zathurarc(5)`. Disjoint with the `sourceFiles` option.",
-      "example": {
-        "default-bg": "#000000",
-        "default-fg": "#FFFFFF"
-      },
-      "mutatorType": "attrs",
-      "type": "attrs"
-    },
-    "sourceFiles": {
-      "description": "A list of paths to source in the `zathurarc` file. This can be used to import extra files, and can be used with impurity. See the zathurarc documentation for valid options: {manpage}`zathurarc(5)`. Disjoint with `settings` and `keybinds` options.",
-      "mutatorType": "listOf<pathLike>",
-      "type": "listOf<pathLike>"
-    }
+  "fish.functions": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "Custom functions to be injected into the wrapped package.\n\nEach attribute should map the name of a function to inline fish script defining its functionality.\n\nDisjoint with the `functionsFiles` option.\n",
+    "loc": [
+      "fish",
+      "functions"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<string>"
   },
-
-  "zellij": {
-    "configContents": {
-      "description": "Config to be injected into the wrapped package's `config.kdl`. See the documentation for valid options: https://zellij.dev/documentation/configuration.html Disjoint with the `configFile` option.",
-      "type": "string"
-    },
-    "configFile": {
-      "description": "`config.kdl` file to be injected into the wrapped package. See the documentation for valid options: https://zellij.dev/documentation/configuration.html Disjoint with the `configContents` option.",
-      "type": "pathLike"
-    },
-    "layoutsContents": {
-      "description": "Custom layouts to be injected into the wrapped package. See the documentation to learn how to make custom layouts and use them: https://zellij.dev/documentation/layouts.html Disjoint with the `layoutsFiles` option.",
-      "type": "attrsOf<string>"
-    },
-    "layoutsFiles": {
-      "description": "Files containing custom layouts to be injected into the wrapped package. See the documentation to learn how to make custom layouts and use them: https://zellij.dev/documentation/layouts.html Disjoint with the `layoutsContents` option.",
-      "type": "listOf<pathLike>"
-    },
-    "package": {
-      "description": "The zellij package to be wrapped.",
-      "type": "derivation"
-    },
-    "themes": {
-      "description": "Attribute set of themes to be injected into the wrapped package. See the zellij documentation to learn how to make custom themes and use them: https://zellij.dev/documentation/themes.html Each attribute name is used as the theme name. The corresponding value must be a folder or derivation whose top level contains a file named `<name>.kdl`. For example, an entry `themes.dracula = <drv>;` where `<drv>` contains `dracula.kdl` will result in `themes/dracula.kdl`.",
-      "type": "attrsOf<pathLike>"
-    }
+  "fish.functionsFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "Files containing custom functions to be injected into the wrapped package.\n\nDisjoint with the `functions` option.\n",
+    "loc": [
+      "fish",
+      "functionsFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
   },
-
-  "zoxide": {
-    "excludedDirs": {
-      "description": "Directory globs that won't be added to the database when navigating with zoxide.",
-      "type": "string"
-    },
-    "flags": {
-      "default": [],
-      "description": "Flags to be automatically appended when creating the zoxide shell integration. See the documentation of valid flags: https://github.com/ajeetdsouza/zoxide#flags",
-      "type": "listOf<string>"
-    },
-    "package": {
-      "description": "The zoxide package to be wrapped.",
-      "type": "derivation"
-    }
+  "fish.interactiveShellInit": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "Shell initialization code to be automatically injected into the wrapped package.\n\nOnly ran when Fish is initialized interactively.\n",
+    "loc": [
+      "fish",
+      "interactiveShellInit"
+    ],
+    "readOnly": false,
+    "type": "string"
   },
-
-  "zsh": {
-    "aliases": {
-      "description": "Aliases to be defined in the wrapped package's `.zshrc` file. Aliases can either be a string defining the command to be aliased, or a struct where you can define the command and if the alias should be global. See the documentation for valid options: https://zsh.sourceforge.io/Intro/intro_8.html",
-      "example": {
-        "G": {
-          "command": "| grep",
-          "global": true
-        },
-        "ls": "ls --color"
-      },
-      "mutatorType": "attrsOf<union<string,global alias>>",
-      "type": "attrsOf<union<string,global alias>>"
+  "fish.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fish.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fish.nix"
+      }
+    ],
+    "description": "The Fish package to be wrapped.",
+    "loc": [
+      "fish",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "fuzzel.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fuzzel.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fuzzel.nix"
+      }
+    ],
+    "description": "`fuzzel.ini` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.ini.5.scd\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "fuzzel",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "fuzzel.dmenuFlags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fuzzel.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fuzzel.nix"
+      }
+    ],
+    "description": "Dmenu related flags to pass to fuzzel when using `settings`/`configFile`\n\nSee the documentation for valid syntax and formatting of the related flags:\nhttps://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.1.scd\n\nRequires that either `settings`/`configFile` be set.\n",
+    "loc": [
+      "fuzzel",
+      "dmenuFlags"
+    ],
+    "readOnly": false,
+    "type": "dmenuFlags"
+  },
+  "fuzzel.logFlags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fuzzel.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fuzzel.nix"
+      }
+    ],
+    "description": "Logging related flags to pass to fuzzel when using `settings`/`configFile`\n\nSee the documentation for valid syntax and formatting of the related flags:\nhttps://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.1.scd\n\nRequires that either `settings`/`configFile` be set.\n",
+    "loc": [
+      "fuzzel",
+      "logFlags"
+    ],
+    "readOnly": false,
+    "type": "logFlags"
+  },
+  "fuzzel.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fuzzel.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fuzzel.nix"
+      }
+    ],
+    "description": "The fuzzel package to be wrapped.",
+    "loc": [
+      "fuzzel",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "fuzzel.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/fuzzel.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/fuzzel.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `fuzzel.ini`.\n\nSee the documentation for valid options:\nhttps://codeberg.org/dnkl/fuzzel/src/branch/master/doc/fuzzel.ini.5.scd\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "fuzzel",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "gh.configDir": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gh.nix"
+      }
+    ],
+    "description": "Folder containing gh configuration files to be injected into the wrapped package.\n\nThis folder should contain a `config.yml` and/or a `hosts.yml`.\n\nDisjoint with the `settings` and `hosts` options.\n",
+    "loc": [
+      "gh",
+      "configDir"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "gh.hosts": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gh.nix"
+      }
+    ],
+    "description": "Host information to be injected into the wrapped package's `hosts.yml`.\n\nDisjoint with the `configDir` option.\n",
+    "loc": [
+      "gh",
+      "hosts"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "gh.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gh.nix"
+      }
+    ],
+    "description": "The gh package to be wrapped.",
+    "loc": [
+      "gh",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "gh.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gh.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.yml`.\n\nSee the documentation:\nhttps://cli.github.com/manual/gh_config\n\nDisjoint with the `configDir` option.\n",
+    "loc": [
+      "gh",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "git.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/git.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/git.nix"
+      }
+    ],
+    "description": "`gitconfig` file to be injected into the wrapped package.\n\nSee the git documentation on the syntax of this file:\nhttps://git-scm.com/docs/git-config#_configuration_file\n\nAnd the documentation on valid options:\nhttps://git-scm.com/docs/git-config#_variables\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "git",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "git.ignoreFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/git.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/git.nix"
+      }
+    ],
+    "description": "File containing extra path globs to be ignored automatically, along with the repo-specific `.gitignore`.\n\nDisjoint with the `ignoredPaths` option.\n",
+    "loc": [
+      "git",
+      "ignoreFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "git.ignoredPaths": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/git.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/git.nix"
+      }
+    ],
+    "description": "Extra path globs to be ignored automatically, along with the repo-specific `.gitignore`.\n\nDisjoint with the `ignoreFile` option.\n",
+    "loc": [
+      "git",
+      "ignoredPaths"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "git.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/git.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/git.nix"
+      }
+    ],
+    "description": "The git package to be wrapped.",
+    "loc": [
+      "git",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "git.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/git.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/git.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `gitconfig`.\n\nSee the git documentation for valid options:\nhttps://git-scm.com/docs/git-config#_variables\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "git",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "gitui.keybinds": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "Keybind overrides to be injected into the wrapped package's `key_bindings.ron`.\n\nEach attrset in the optionAttrsets are converted to RON in this manner:\n`${action_name} = { char = \"x\"; mod = \"y\"; }; => action: Some(( code: x, modifiers: y))`\n\nWhere\n`action_name` is a valid [Gitui action](https://github.com/gitui-org/gitui/blob/master/src/keys/key_list.rs#L83),\n`char` is an *optional* valid [Crossterm KeyCode](https://docs.rs/crossterm/latest/crossterm/event/enum.KeyCode.html)\nand `mod` is an *optional* valid [Crossterm Modifier](https://docs.rs/crossterm/latest/crossterm/event/struct.KeyModifiers.html)\n\nAn action that does not set either `char` or `mod` disables the keybind.\n\nFor more information on how `key_bindings.ron` is formatted and used:\nhttps://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md\n\nDisjoint with the `keybindsFile` option.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  branch_find = { };\n  commit_amend = {\n    char = \"Char('A')\";\n    mod = \"SHIFT\";\n  };\n  move_left = {\n    char = \"Char('h')\";\n  };\n}"
     },
-    "extraPackages": {
-      "description": "Runtime dependencies to be injected into the wrapped package's path.",
-      "mutatorType": "listOf<derivation>",
-      "type": "listOf<derivation>"
+    "loc": [
+      "gitui",
+      "keybinds"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<keybind>"
+  },
+  "gitui.keybindsFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "`key_bindings.ron` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md#key-config\n\nDisjoint with the `keybinds` option.\n",
+    "loc": [
+      "gitui",
+      "keybindsFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "gitui.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "The gitui package to be wrapped.",
+    "loc": [
+      "gitui",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "gitui.symbols": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "Key symbol overrides to be injected into the wrapped package's `key_symbols.ron`.\n\nEach attrset pair is converted to RON in this manner:\n`{ ${key} = symbol }; => key: Some(symbol)`\n\nWhere\n`key` is a valid [Gitui KeySymbol](https://github.com/gitui-org/gitui/blob/master/src/keys/symbols.rs),\nand `char` is a valid character string.\n\nFor more information on how `key_bindings.ron` is formatted and used:\nhttps://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md#key-symbols\n\nDisjoint with the `symbolsFile` option.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  page_down = \"▼\";\n}"
     },
-    "extraZshrc": {
-      "description": "zsh script to be injected after the `zshrcFiles` option in the wrapped package's `.zshrc`.",
-      "example": "# zoxide must be added at the end of the .zshrc so we use extraZshrc. # https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation eval \"$(zoxide init zsh)\"",
-      "type": "string"
+    "loc": [
+      "gitui",
+      "symbols"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<string>"
+  },
+  "gitui.symbolsFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "`key_symbols.ron` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/gitui-org/gitui/blob/master/KEY_CONFIG.md#key-symbols\n\nDisjoint with the `symbols` option.\n",
+    "loc": [
+      "gitui",
+      "symbolsFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "gitui.syntaxFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "Files containing .thTheme syntax files that can be loaded by `theme.ron`\n\nSee the documentation for loading `.thTheme` files in `theme.ron`:\nhttps://github.com/gitui-org/gitui/blob/master/THEMES.md\n",
+    "loc": [
+      "gitui",
+      "syntaxFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
+  },
+  "gitui.theme": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "Theme overrides to be injected into the wrapped package's `theme.ron`.\n\nEach attrset pair is converted to RON in this manner:\n`{ ${element} = color; }; => element: Some(\"color\")`\n\nWhere\n`element` is a valid [Gitui style element](https://github.com/gitui-org/gitui/blob/master/src/ui/style.rs#L305)\nand `color` is a valid hex string (\"#FFFFFF\") or [Ratatui color](https://docs.rs/crossterm/latest/crossterm/event/struct.KeyModifiers.html)\n\nFor more information on how `key_bindings.ron` is formatted and used:\nhttps://github.com/gitui-org/gitui/blob/master/THEMES.md\n\nDisjoint with the `themeFile` option.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  selection_bg = \"Blue\";\n  selection_fg = \"#ffffff\";\n}"
     },
-    "extraZshrcFiles": {
-      "description": "zsh files to be sourced at the end of the wrapped package's `.zshrc` file.",
-      "mutatorType": "listOf<pathLike>",
-      "type": "listOf<pathLike>"
+    "loc": [
+      "gitui",
+      "theme"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<string>"
+  },
+  "gitui.themeFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gitui.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gitui.nix"
+      }
+    ],
+    "description": "`theme.ron` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/gitui-org/gitui/blob/master/THEMES.md\n\nDisjoint with the `theme` option.\n",
+    "loc": [
+      "gitui",
+      "themeFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "gnupg.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gnupg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gnupg.nix"
+      }
+    ],
+    "description": "`gpg.conf` file to be injected into the wrapped package.\n\nSee the gnupg manual:\nhttps://www.gnupg.org/documentation/manuals/gnupg/GPG-Options.html\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "gnupg",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "gnupg.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gnupg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gnupg.nix"
+      }
+    ],
+    "description": "The gnupg package to be wrapped.",
+    "loc": [
+      "gnupg",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "gnupg.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/gnupg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/gnupg.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `gpg.conf`.\n\nSee the gnupg manual:\nhttps://www.gnupg.org/documentation/manuals/gnupg/GPG-Options.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "gnupg",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "helix.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "`config.toml` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://docs.helix-editor.com/configuration.html\n\nDisjoint with the `config` option.\n",
+    "loc": [
+      "helix",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "helix.extraPackages": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "Packages to be automatically added to helix's path. Mainly used to set language servers and formatters.\n",
+    "loc": [
+      "helix",
+      "extraPackages"
+    ],
+    "readOnly": false,
+    "type": "listOf<derivation>"
+  },
+  "helix.languages": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "Language config to be injected into the wrapped package's `languages.toml`.\n\nSee the documentation for valid options:\nhttps://docs.helix-editor.com/languages.html\n\nDisjoint with the `languagesFile` option.\n",
+    "loc": [
+      "helix",
+      "languages"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "helix.languagesFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "`languages.toml` file to be injected into the wrapped package.\n\nSee the documentation on valid options:\nhttps://docs.helix-editor.com/languages.html\n\nDisjoint with the `languages` option.\n",
+    "loc": [
+      "helix",
+      "languagesFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "helix.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "The helix package to be wrapped.",
+    "loc": [
+      "helix",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "helix.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.toml`.\n\nSee the documentation:\nhttps://docs.helix-editor.com/configuration.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "helix",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "helix.themeDir": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "Folder containing theme configuration files to be injected into the wrapped package.\n\nThis folder should contain one or multiple `$theme_name.toml` files.\n\nDisjoint with the `themes` option.\n",
+    "loc": [
+      "helix",
+      "themeDir"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "helix.themes": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/helix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/helix.nix"
+      }
+    ],
+    "description": "An attrset of custom themes, mapping the name of a theme to its settings.\n\nSee the documentation for valid options:\nhttps://docs.helix-editor.com/themes.html\n\nDisjoint with the `themeDir` option.\n",
+    "loc": [
+      "helix",
+      "themes"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<attrs>"
+  },
+  "hydrus.clientFlags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/hydrus.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/hydrus.nix"
+      }
+    ],
+    "description": "List of hydrus-client flags to pass to hydrus client on startup.\n\nNote that paths passed to db_dir/temp_dir should be writable (not in the nix store)\n\nSee the documentation for valid syntax and formatting of the related flags:\nhttps://hydrusnetwork.github.io/hydrus/launch_arguments.html\n",
+    "loc": [
+      "hydrus",
+      "clientFlags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "hydrus.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/hydrus.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/hydrus.nix"
+      }
+    ],
+    "description": "The hydrus package to be wrapped.",
+    "loc": [
+      "hydrus",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "hydrus.serverFlags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/hydrus.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/hydrus.nix"
+      }
+    ],
+    "description": "List of hydrus-server flags to pass to hydrus server on startup.\n\nThese flags only apply to hydrus-server, and are not required for basic client-only use, see:\nhttps://hydrusnetwork.github.io/hydrus/youDontWantTheServer.html\n\nNote that paths passed to db_dir/temp_dir should be writable (not in the nix store)\n\nSee the documentation for valid syntax and formatting of the related flags:\nhttps://hydrusnetwork.github.io/hydrus/launch_arguments.html\n",
+    "loc": [
+      "hydrus",
+      "serverFlags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "hyfetch.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/hyfetch.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/hyfetch.nix"
+      }
+    ],
+    "description": "`hyfetch.json` file to be injected into the wrapped package.\n\nUnwrapped hyfetch configurations can be created via:\n`hyfetch --config-file hyfetch.json --config`\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "hyfetch",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "hyfetch.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/hyfetch.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/hyfetch.nix"
+      }
+    ],
+    "description": "The hyfetch package to be wrapped.",
+    "loc": [
+      "hyfetch",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "hyfetch.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/hyfetch.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/hyfetch.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `hyfetch.json`.\n\nUnwrapped hyfetch configurations can be created via:\n`hyfetch --config-file hyfetch.json --config`\nThis can then be turned into a nix value:\n`nix-instantiate --eval -E 'builtins.fromJSON (builtins.readFile ./hyfetch.json)'`\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "hyfetch",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "irssi.autoconnect": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/irssi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/irssi.nix"
+      }
+    ],
+    "description": "The server to be automatically connected to.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  password = \"hunter2\";\n  port = \"6697\";\n  server = \"irc.libera.chat\";\n}"
     },
-    "package": {
-      "description": "The zsh package to be wrapped.",
-      "type": "derivation"
+    "loc": [
+      "irssi",
+      "autoconnect"
+    ],
+    "readOnly": false,
+    "type": "autoconnect"
+  },
+  "irssi.config": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/irssi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/irssi.nix"
+      }
+    ],
+    "description": "The config to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://irssi.org/documentation/settings/\n\nDisjoint with the `configDir` option.\n",
+    "loc": [
+      "irssi",
+      "config"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "irssi.configDir": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/irssi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/irssi.nix"
+      }
+    ],
+    "description": "The path of `.irssi` to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://irssi.org/documentation/settings/\n\nDisjoint with the `config` option.\n",
+    "loc": [
+      "irssi",
+      "configDir"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "irssi.hostname": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/irssi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/irssi.nix"
+      }
+    ],
+    "description": "The default hostname to be injected into the wrapped package.",
+    "loc": [
+      "irssi",
+      "hostname"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "irssi.nickname": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/irssi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/irssi.nix"
+      }
+    ],
+    "description": "The default nickname to be injected into the wrapped package.",
+    "loc": [
+      "irssi",
+      "nickname"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "irssi.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/irssi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/irssi.nix"
+      }
+    ],
+    "description": "The irssi package to be wrapped.",
+    "loc": [
+      "irssi",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "jujutsu.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/jujutsu.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/jujutsu.nix"
+      }
+    ],
+    "description": "`config.toml` file to be injected into the wrapped package.\n\nSee the jujutsu documentation for valid options:\nhttps://docs.jj-vcs.dev/latest/config/\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "jujutsu",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "jujutsu.extraPackages": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/jujutsu.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/jujutsu.nix"
+      }
+    ],
+    "description": "Packages to be automatically added to jujutsu's path. Can be used to enable 3-pane diff editing by using Meld or diffedit3.\n\nSee the jujutsu documentation on how to achieve this:\nhttps://docs.jj-vcs.dev/latest/config/#experimental-3-pane-diff-editing\n",
+    "loc": [
+      "jujutsu",
+      "extraPackages"
+    ],
+    "readOnly": false,
+    "type": "listOf<derivation>"
+  },
+  "jujutsu.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/jujutsu.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/jujutsu.nix"
+      }
+    ],
+    "description": "The jujutsu package to be wrapped.",
+    "loc": [
+      "jujutsu",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "jujutsu.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/jujutsu.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/jujutsu.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.toml`.\n\nSee the jujutsu documentation for valid options:\nhttps://docs.jj-vcs.dev/latest/config/\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "jujutsu",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "kitty.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/kitty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/kitty.nix"
+      }
+    ],
+    "description": "`kitty.conf` file to be injected into the wrapped package.\n\nSee the kitty documentation:\nhttps://sw.kovidgoyal.net/kitty/conf.html\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "kitty",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "kitty.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/kitty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/kitty.nix"
+      }
+    ],
+    "description": "The kitty package to be wrapped.",
+    "loc": [
+      "kitty",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "kitty.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/kitty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/kitty.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `kitty.conf`.\n\nSee the kitty documentation:\nhttps://sw.kovidgoyal.net/kitty/conf.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "kitty",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "kitty.theme": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/kitty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/kitty.nix"
+      }
+    ],
+    "description": "Theme name from `pkgs.kitty-themes` to be used.\n\nEach of the files in this folder constitute a valid theme:\nhttps://github.com/kovidgoyal/kitty-themes/tree/master/themes\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "\"Catppuccin-Mocha\""
     },
-    "plugins": {
-      "description": "Plugins to be appended to the wrapped package's `.zshrc`. If a value is a derivation, it will be sourced as `<derivation>/share/<derivation.pname>/<derivation.pname>.zsh` which should be compatible with the majority of plugins. If this path is incorrect then the value may be defined as an attrSet containing the attrs `package` and `path` and will be sourced as `<package>/<path>`.",
-      "example": "[   pkgs.zsh-autosuggestions   {     package = pkgs.nix-zsh-completions;     path = \"share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh\";   } ];",
-      "mutatorType": "listOf<union<derivation,plugin>>",
-      "type": "listOf<union<derivation,plugin>>"
+    "loc": [
+      "kitty",
+      "theme"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "kitty.themeFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/kitty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/kitty.nix"
+      }
+    ],
+    "description": "Path containing a Kitty theme to be used.\n",
+    "loc": [
+      "kitty",
+      "themeFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "less.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/less.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/less.nix"
+      }
+    ],
+    "description": "`lesskey` file to be injected into the wrapped package.\n\nThis file doesn't just contain keybinds, but can also set flags with the\n`#env` section.\n\nSee the documentation for valid options:\nhttps://man7.org/linux/man-pages/man1/lesskey.1.html\n\nDisjoint with the `flags` option.\n",
+    "loc": [
+      "less",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "less.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/less.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/less.nix"
+      }
+    ],
+    "description": "Flags to be automatically appended when running less.\n\nSee the documentation for valid options:\nhttps://man7.org/linux/man-pages/man1/less.1.html#:~:text=OPTIONS,-top\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "less",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "less.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/less.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/less.nix"
+      }
+    ],
+    "description": "The less package to be wrapped.",
+    "loc": [
+      "less",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "mangowc.autostartContents": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mangowc.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mangowc.nix"
+      }
+    ],
+    "description": "Script that get runs on startup, injected into the wrapped packages `autostart.sh`\n\nSee the mangowc docs for valid options:\nhttps://mangowm.github.io/docs/configuration/basics#autostart\n\nDisjoint with the `autostartFile` option.\n",
+    "loc": [
+      "mangowc",
+      "autostartContents"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "mangowc.autostartFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mangowc.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mangowc.nix"
+      }
+    ],
+    "description": "`autostart.sh` file to be injected into the wrapped package.\n\nSee the mangowc docs for valid options:\nhttps://mangowm.github.io/docs/configuration/basics#autostart\n\nDisjoint with the `autostartContents` option.\n",
+    "loc": [
+      "mangowc",
+      "autostartFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "mangowc.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mangowc.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mangowc.nix"
+      }
+    ],
+    "description": "`config.conf` file to be injected into the wrapped package.\n\nSee the mangowc docs for valid options:\nhttps://mangowm.github.io/docs/configuration/basics\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "mangowc",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "mangowc.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mangowc.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mangowc.nix"
+      }
+    ],
+    "description": "The mangowc package to be wrapped.",
+    "loc": [
+      "mangowc",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "mangowc.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mangowc.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mangowc.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.conf`.\n\nSee the mangowc docs for valid options:\nhttps://mangowm.github.io/docs/configuration/basics\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "mangowc",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "mkWrapper.binaryPath": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "description": "Path within the input derivation to the binary which should be wrapped",
+    "loc": [
+      "mkWrapper",
+      "binaryPath"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "mkWrapper.environment": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "{ }"
     },
-    "settings": {
-      "description": "Options to be enabled or disabled in the wrapped package's `.zshrc` file. See the documentation for valid options: https://zsh.sourceforge.io/Doc/Release/Options.html",
-      "example": {
-        "appendhistory": true,
-        "autocd": false,
-        "beep": false,
-        "sharehistory": true
-      },
-      "mutatorType": "attrsOf<bool>",
-      "type": "attrsOf<bool>"
+    "description": "Environment variables to be set during the execution of the wrapped program",
+    "loc": [
+      "mkWrapper",
+      "environment"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<union<null,pathLike,readFromFileAtRuntime>>"
+  },
+  "mkWrapper.extraPaths": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "[ ]"
     },
-    "variables": {
-      "description": "Environment variables to be defined in the wrapped package's `.zshrc` file.",
-      "example": {
-        "HISTFILE": "~/.histfile",
-        "HISTSIZE": 5000
-      },
-      "mutatorType": "attrs",
-      "type": "attrs"
+    "description": "Extra derivations which should have their directory structures replicated in the final package.",
+    "loc": [
+      "mkWrapper",
+      "extraPaths"
+    ],
+    "readOnly": false,
+    "type": "listOf<derivation>"
+  },
+  "mkWrapper.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "[ ]"
     },
-    "zshrc": {
-      "description": "zsh script to be injected into the wrapped package's `.zshrc`.",
-      "example": "# Enable vim mode bindkey -v # Enable completions. A custom zcompdump location must be used as the # default location will be $ZDOTDIR which is immutable. autoload -Uz compinit compinit -d ~/.cache/zsh/.zcompdump -C",
-      "type": "string"
+    "description": "Flags to be automatically appended to the wrapped program.",
+    "loc": [
+      "mkWrapper",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "mkWrapper.name": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "description": "The name of the package to be wrapped.\n\nThis determines the pname of the wrapped package, as well as the derivation to be automatically run when using `nix run`.\n",
+    "loc": [
+      "mkWrapper",
+      "name"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "mkWrapper.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "description": "The package to be wrapped.",
+    "loc": [
+      "mkWrapper",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "mkWrapper.postWrap": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "null"
     },
-    "zshrcFiles": {
-      "description": "zsh files to be sourced after the `zshrc` option in the wrapped package's `.zshrc` file.",
-      "mutatorType": "listOf<pathLike>",
-      "type": "listOf<pathLike>"
-    }
+    "description": "Commands to be run after the wrapping process in the build steps.",
+    "loc": [
+      "mkWrapper",
+      "postWrap"
+    ],
+    "readOnly": false,
+    "type": "nullOr<string>"
+  },
+  "mkWrapper.preWrap": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "null"
+    },
+    "description": "Commands to be run before the wrapping process in the build steps.",
+    "loc": [
+      "mkWrapper",
+      "preWrap"
+    ],
+    "readOnly": false,
+    "type": "nullOr<string>"
+  },
+  "mkWrapper.symlinks": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "{ }"
+    },
+    "description": "Symlinks to be included in the resulting derivation.\nEach key specifies the location within the derivation to create the symlink.\nEach value specifies where the symlink should be directed to.\n",
+    "loc": [
+      "mkWrapper",
+      "symlinks"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<nullOr<pathLike>>"
+  },
+  "mkWrapper.wrapperArgs": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mkWrapper.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mkWrapper.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "null"
+    },
+    "description": "Extra args passed directly to wrapProgram.",
+    "loc": [
+      "mkWrapper",
+      "wrapperArgs"
+    ],
+    "readOnly": false,
+    "type": "nullOr<string>"
+  },
+  "mpv.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mpv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mpv.nix"
+      }
+    ],
+    "description": "`mpv.conf` file to be injected into the wrapped package.\n\nSee the manual for syntax and valid options:\nhttps://mpv.io/manual/stable/\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "mpv",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "mpv.keybinds": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mpv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mpv.nix"
+      }
+    ],
+    "description": "Keybinds to be injected into the wrapped package's `input.conf`.\n\nSee the manual for valid options:\nhttps://mpv.io/manual/stable/#input-conf\n\nDisjoint with the `keybindsFile` option.\n",
+    "loc": [
+      "mpv",
+      "keybinds"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "mpv.keybindsFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mpv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mpv.nix"
+      }
+    ],
+    "description": "`input.conf` file to be injected into the wrapped package.\n\nSee the manual for syntax and valid options:\nhttps://mpv.io/manual/stable/#input-conf\n\nDisjoint with the `keybinds` option.\n",
+    "loc": [
+      "mpv",
+      "keybindsFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "mpv.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mpv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mpv.nix"
+      }
+    ],
+    "description": "The mpv package to be wrapped.",
+    "loc": [
+      "mpv",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "mpv.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/mpv.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/mpv.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `mpv.conf`.\n\nSee the manual for valid options:\nhttps://mpv.io/manual/stable/\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "mpv",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "niri.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/niri.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/niri.nix"
+      }
+    ],
+    "description": "`config.kdl` file to be injected into the wrapped package.\n\nSee the niri documentation for syntax and valid options:\nhttps://github.com/niri-wm/niri/wiki/Configuration:-Introduction\n",
+    "loc": [
+      "niri",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "niri.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/niri.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/niri.nix"
+      }
+    ],
+    "description": "The niri package to be wrapped.",
+    "loc": [
+      "niri",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "nixpkgs.lib": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/nixpkgs.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/nixpkgs.nix"
+      }
+    ],
+    "loc": [
+      "nixpkgs",
+      "lib"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "nixpkgs.pkgs": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/nixpkgs.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/nixpkgs.nix"
+      }
+    ],
+    "loc": [
+      "nixpkgs",
+      "pkgs"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "nushell.extraPackages": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/nushell.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/nushell.nix"
+      }
+    ],
+    "description": "Runtime dependencies to be injected into the wrapped package's path.\n",
+    "loc": [
+      "nushell",
+      "extraPackages"
+    ],
+    "readOnly": false,
+    "type": "listOf<derivation>"
+  },
+  "nushell.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/nushell.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/nushell.nix"
+      }
+    ],
+    "description": "The nushell package to be wrapped.",
+    "loc": [
+      "nushell",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "nushell.shellInit": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/nushell.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/nushell.nix"
+      }
+    ],
+    "description": "Shell initialisation code to be injected into the wrapped package's `config.nu`.\n\nSee the nushell documentation for valid options:\nhttps://www.nushell.sh/book/configuration.html\n",
+    "loc": [
+      "nushell",
+      "shellInit"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "nushell.sourceFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/nushell.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/nushell.nix"
+      }
+    ],
+    "description": "A list of paths to source in the `config.nu` file.\nThis can be used to import extra files, and can be used with impurity\n",
+    "loc": [
+      "nushell",
+      "sourceFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
+  },
+  "ripgrep.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/ripgrep.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/ripgrep.nix"
+      }
+    ],
+    "description": "`ripgreprc` file, containing flags to be automatically appended when running ripgrep.\n\nSee the documentation of valid flags:\nhttps://manpages.ubuntu.com/manpages/jammy/man1/rg.1.html#:~:text=OPTIONS\n\nThis file should have each flag on its own line. See the documentation of the file's format:\nhttps://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "ripgrep",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "ripgrep.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/ripgrep.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/ripgrep.nix"
+      }
+    ],
+    "description": "Flags to be automatically appended when running ripgrep.\n\nSee the documentation of valid flags:\nhttps://manpages.ubuntu.com/manpages/jammy/man1/rg.1.html#:~:text=OPTIONS\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "ripgrep",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "ripgrep.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/ripgrep.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/ripgrep.nix"
+      }
+    ],
+    "description": "The ripgrep package to be wrapped.",
+    "loc": [
+      "ripgrep",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "satty.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/satty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/satty.nix"
+      }
+    ],
+    "description": "`config.toml` file to be injected into the wrapped package.\n\nSee the Satty documentation for syntax and valid options:\nhttps://github.com/Satty-org/Satty#configuration-file\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "satty",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "satty.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/satty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/satty.nix"
+      }
+    ],
+    "description": "The Satty package to be wrapped.",
+    "loc": [
+      "satty",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "satty.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/satty.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/satty.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.toml`.\n\nSee the Satty documentation for valid options:\nhttps://github.com/Satty-org/Satty#configuration-file\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "satty",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "starship.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/starship.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/starship.nix"
+      }
+    ],
+    "description": "`starship.toml` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://starship.rs/config/\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "starship",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "starship.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/starship.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/starship.nix"
+      }
+    ],
+    "description": "The starship package to be wrapped.",
+    "loc": [
+      "starship",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "starship.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/starship.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/starship.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `starship.toml`.\n\nSee the documentation for valid options:\nhttps://starship.rs/config/\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "starship",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "starship.wrapperAttrs": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/starship.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/starship.nix"
+      }
+    ],
+    "description": "Attributes to be passed directly to the wrapped package's `mkWrapper` call.\n\nThis is primarily an implementation detail of how the git module mutates the starship wrapper.\nSetting or mutating it yourself isn't recommended.\n",
+    "loc": [
+      "starship",
+      "wrapperAttrs"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "swaybg.backgroundImage": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swaybg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swaybg.nix"
+      }
+    ],
+    "description": "Path to the background image to be displayed by the wrapped package.",
+    "loc": [
+      "swaybg",
+      "backgroundImage"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "swaybg.color": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swaybg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swaybg.nix"
+      }
+    ],
+    "description": "Hex formatted background color to be displayed by the wrapped package.",
+    "example": {
+      "_type": "literalExpression",
+      "text": "\"ffffff\""
+    },
+    "loc": [
+      "swaybg",
+      "color"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "swaybg.outputName": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swaybg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swaybg.nix"
+      }
+    ],
+    "description": "Name of the output to be used by the wrapped package.",
+    "example": {
+      "_type": "literalExpression",
+      "text": "\"eDP-1\""
+    },
+    "loc": [
+      "swaybg",
+      "outputName"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "swaybg.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swaybg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swaybg.nix"
+      }
+    ],
+    "description": "The swaybg package to be wrapped.",
+    "loc": [
+      "swaybg",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "swaybg.scalingMode": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swaybg.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swaybg.nix"
+      }
+    ],
+    "description": "Mode to determine how the wrapped package scales images.\n\nSee the documentation for valid modes: https://man.archlinux.org/man/extra/swaybg/swaybg.1.en#OPTIONS\n",
+    "loc": [
+      "swaybg",
+      "scalingMode"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "swayidle.configContents": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swayidle.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swayidle.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config` file.\n\nSee the documentation for valid options: https://man.archlinux.org/man/swayidle.1\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "swayidle",
+      "configContents"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "swayidle.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swayidle.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swayidle.nix"
+      }
+    ],
+    "description": "`config` file to be injected into the wrapped package.\n\nSee the documentation for valid options: https://man.archlinux.org/man/swayidle.1\n\nDisjoint with the `configContents` option.\n",
+    "loc": [
+      "swayidle",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "swayidle.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swayidle.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swayidle.nix"
+      }
+    ],
+    "description": "The swayidle package to be wrapped.",
+    "loc": [
+      "swayidle",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "swayidle.seatName": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/swayidle.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/swayidle.nix"
+      }
+    ],
+    "description": "The seat name to be injected into the wrapped package's flags.",
+    "loc": [
+      "swayidle",
+      "seatName"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "tealdeer.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/tealdeer.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/tealdeer.nix"
+      }
+    ],
+    "description": "`config.toml` file to be injected into the wrapped package.\n\nSee the tealdeer documentation:\nhttps://tealdeer-rs.github.io/tealdeer/config.html\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "tealdeer",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "tealdeer.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/tealdeer.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/tealdeer.nix"
+      }
+    ],
+    "description": "The tealdeer package to be wrapped.",
+    "loc": [
+      "tealdeer",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "tealdeer.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/tealdeer.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/tealdeer.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.toml`.\n\nSee the tealdeer documentation:\nhttps://tealdeer-rs.github.io/tealdeer/config.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "tealdeer",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "termfilechooser.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/termfilechooser.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/termfilechooser.nix"
+      }
+    ],
+    "description": "Configuration file to be injected into the wrapped package.\n\nSee the termfilechooser documentation for valid options:\nhttps://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser#configuration\n",
+    "loc": [
+      "termfilechooser",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "termfilechooser.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/termfilechooser.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/termfilechooser.nix"
+      }
+    ],
+    "description": "The xdg-desktop-portal-termfilechooser package to be wrapped.",
+    "loc": [
+      "termfilechooser",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "termfilechooser.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/termfilechooser.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/termfilechooser.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's configuration file.\n\nSee the termfilechooser documentation for valid options:\nhttps://github.com/hunkyburrito/xdg-desktop-portal-termfilechooser#configuration\n",
+    "loc": [
+      "termfilechooser",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "waybar.barStyle": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/waybar.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/waybar.nix"
+      }
+    ],
+    "description": "CSS to be injected into the wrapped package's `style.css`.\n\nSee the documentation for writing waybar themes:\nhttps://github.com/Alexays/Waybar/wiki/Styling\n\nDisjoint with the `cssFile` option.\n",
+    "loc": [
+      "waybar",
+      "barStyle"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "waybar.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/waybar.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/waybar.nix"
+      }
+    ],
+    "description": "`config.jsonc` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/Alexays/Waybar/wiki/Configuration\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "waybar",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "waybar.cssFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/waybar.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/waybar.nix"
+      }
+    ],
+    "description": "`style.css` file to be injected into the wrapped package.\n\nSee the documentation for writing waybar themes:\nhttps://github.com/Alexays/Waybar/wiki/Styling\n\nLive reloading of themes can be accomplished with an impure path and options.interactiveEnv set to true.\n\nDisjoint with the `barStyle` option.\n",
+    "loc": [
+      "waybar",
+      "cssFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "waybar.interactiveEnv": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/waybar.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/waybar.nix"
+      }
+    ],
+    "description": "Sets GTK_DEBUG=interactive to launch the wrapped package with the GTK CSS Inspector.\n\nSee the documentation for use of the inspection tool:\nhttps://developer.gnome.org/documentation/tools/inspector.html\n\nCan be used with an impure path in options.cssFile to enable live theme reloading.\n",
+    "loc": [
+      "waybar",
+      "interactiveEnv"
+    ],
+    "readOnly": false,
+    "type": "bool"
+  },
+  "waybar.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/waybar.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/waybar.nix"
+      }
+    ],
+    "description": "The waybar package to be wrapped.",
+    "loc": [
+      "waybar",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "waybar.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/waybar.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/waybar.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `config.jsonc`.\n\nSee the documentation for valid options:\nhttps://github.com/Alexays/Waybar/wiki/Configuration\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "waybar",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "wezterm.configContents": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wezterm.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wezterm.nix"
+      }
+    ],
+    "description": "Lua configuration to be injected into the wrapped package's `wezterm.lua`.\n\nSee the documentation for valid options:\nhttps://wezterm.org/config/lua/general.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "wezterm",
+      "configContents"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "wezterm.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wezterm.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wezterm.nix"
+      }
+    ],
+    "description": "`wezterm.lua` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://wezterm.org/config/lua/general.html\n\nDisjoint with the `configContents` option.\n",
+    "loc": [
+      "wezterm",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "wezterm.configModules": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wezterm.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wezterm.nix"
+      }
+    ],
+    "description": "Files containing .lua configuration modules to be injected into the wrapped package.\n\nSee the documentation to learn how to refer to modules in your wezterm.lua file:\nhttps://wezterm.org/config/files.html?h=modules#making-your-own-lua-modules\n",
+    "loc": [
+      "wezterm",
+      "configModules"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
+  },
+  "wezterm.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wezterm.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wezterm.nix"
+      }
+    ],
+    "description": "The wezterm package to be wrapped.",
+    "loc": [
+      "wezterm",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "wiremix.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wiremix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wiremix.nix"
+      }
+    ],
+    "description": "`wiremix.toml` file to be injected into the wrapped package.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/tsowell/wiremix/blob/main/wiremix.toml\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "wiremix",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "wiremix.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wiremix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wiremix.nix"
+      }
+    ],
+    "description": "The wiremix package to be wrapped.",
+    "loc": [
+      "wiremix",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "wiremix.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/wiremix.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/wiremix.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `wiremix.toml`.\n\nSee the documentation for syntax and valid options:\nhttps://github.com/tsowell/wiremix/blob/main/wiremix.toml\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "wiremix",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "yazi.extraPackages": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Packages to be automatically added as Yazi dependencies.\n\nThis defaults to the optionalDeps of the Yazi package in nixpkgs, set here:\nhttps://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/ya/yazi/package.nix#L8\n\nThe dependency `File` is added regardless of the content of this option, because it's non-optional.\nSee the Yazi docs on this topic:\nhttps://yazi-rs.github.io/docs/installation\n",
+    "loc": [
+      "yazi",
+      "extraPackages"
+    ],
+    "readOnly": false,
+    "type": "listOf<derivation>"
+  },
+  "yazi.flavors": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Attribute set of flavors to be injected into the wrapped package.\n\nEach attribute should map the name of a flavor (suffixed with `.yazi`) to the path or derivation containing the flavor's contents.\n",
+    "loc": [
+      "yazi",
+      "flavors"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<pathLike>"
+  },
+  "yazi.initLua": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Lua script to be injected into the wrapped package's `init.lua`.\n\nSee the documentation on how to use the Yazi API:\nhttps://yazi-rs.github.io/docs/plugins/overview\n\nDisjoint with the `initLuaFile` option.\n",
+    "loc": [
+      "yazi",
+      "initLua"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "yazi.initLuaFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "`init.lua` file to be injected into the wrapped package.\n\nSee the documentation on how to use the Yazi API:\nhttps://yazi-rs.github.io/docs/plugins/overview\n\nDisjoint with the `initLua` option.\n",
+    "loc": [
+      "yazi",
+      "initLuaFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "yazi.keymap": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Keybinds injected into the wrapped package's `keymap.toml`.\n\nSee the documentation for valid options:\nhttps://yazi-rs.github.io/docs/configuration/keymap\n\nDisjoint with the `keymapFile` option.\n",
+    "loc": [
+      "yazi",
+      "keymap"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "yazi.keymapFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "`keymap.toml` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://yazi-rs.github.io/docs/configuration/keymap\n\nDisjoint with the `keymap` option.\n",
+    "loc": [
+      "yazi",
+      "keymapFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "yazi.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "The yazi package to be wrapped.\nNote that this should use a `-unwrapped` variant.\n",
+    "loc": [
+      "yazi",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "yazi.plugins": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Attribute set of plugins to be injected into the wrapped package.\n\nEach attribute should map the name of a plugin (suffixed with `.yazi`) to the path or derivation containing the plugin's contents.\n",
+    "loc": [
+      "yazi",
+      "plugins"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<pathLike>"
+  },
+  "yazi.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Settings to be injected into the wrapped package's `yazi.toml`.\n\nSee the documentation for valid options:\nhttps://yazi-rs.github.io/docs/configuration/yazi\n\nDisjoint with the `settingsFile` option.\n",
+    "loc": [
+      "yazi",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "yazi.settingsFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "`yazi.toml` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://yazi-rs.github.io/docs/configuration/yazi\n\nDisjoint with the `settings` option.\n",
+    "loc": [
+      "yazi",
+      "settingsFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "yazi.theme": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "Theme settings to be injected into the wrapped package's `theme.toml`.\n\nSee the documentation for valid options:\nhttps://yazi-rs.github.io/docs/configuration/theme/\n\nDisjoint with the `themeFile` option.\n",
+    "loc": [
+      "yazi",
+      "theme"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "yazi.themeFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/yazi.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/yazi.nix"
+      }
+    ],
+    "description": "`theme.toml` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://yazi-rs.github.io/docs/configuration/theme/\n\nDisjoint with the `theme` option.\n",
+    "loc": [
+      "yazi",
+      "themeFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "zathura.keybinds": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zathura.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zathura.nix"
+      }
+    ],
+    "description": "Keybindings to be injected into the wrapped package's `zathurarc`.\n\nSee the zathurarc documentation for the full list of possible mappings:\n{manpage}`zathurarc(5)`.\n\nYou can create a mode-specific mapping by specifying the mode before the key:\n`\"[normal] <C-b>\" = \"scroll left\";`.\n\nDisjoint with the `sourceFiles` option.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  \"<Right>\" = \"navigate next\";\n  D = \"toggle_page_mode\";\n  \"[fullscreen] <C-i>\" = \"zoom in\";\n}"
+    },
+    "loc": [
+      "zathura",
+      "keybinds"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "zathura.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zathura.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zathura.nix"
+      }
+    ],
+    "description": "The zathura package to be wrapped.",
+    "loc": [
+      "zathura",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "zathura.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zathura.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zathura.nix"
+      }
+    ],
+    "description": "Options to be injected into the wrapped package's `zathurarc`.\n\nSee the zathurarc documentation for the full list of options:\n{manpage}`zathurarc(5)`.\n\nDisjoint with the `sourceFiles` option.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  default-bg = \"#000000\";\n  default-fg = \"#FFFFFF\";\n}"
+    },
+    "loc": [
+      "zathura",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "zathura.sourceFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zathura.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zathura.nix"
+      }
+    ],
+    "description": "A list of paths to source in the `zathurarc` file.\nThis can be used to import extra files, and can be used with impurity.\n\nSee the zathurarc documentation for valid options:\n{manpage}`zathurarc(5)`.\n\nDisjoint with `settings` and `keybinds` options.\n",
+    "loc": [
+      "zathura",
+      "sourceFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
+  },
+  "zellij.configContents": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zellij.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zellij.nix"
+      }
+    ],
+    "description": "Config to be injected into the wrapped package's `config.kdl`.\n\nSee the documentation for valid options:\nhttps://zellij.dev/documentation/configuration.html\n\nDisjoint with the `configFile` option.\n",
+    "loc": [
+      "zellij",
+      "configContents"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "zellij.configFile": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zellij.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zellij.nix"
+      }
+    ],
+    "description": "`config.kdl` file to be injected into the wrapped package.\n\nSee the documentation for valid options:\nhttps://zellij.dev/documentation/configuration.html\n\nDisjoint with the `configContents` option.\n",
+    "loc": [
+      "zellij",
+      "configFile"
+    ],
+    "readOnly": false,
+    "type": "pathLike"
+  },
+  "zellij.layoutsContents": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zellij.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zellij.nix"
+      }
+    ],
+    "description": "Custom layouts to be injected into the wrapped package.\n\nSee the documentation to learn how to make custom layouts and use them:\nhttps://zellij.dev/documentation/layouts.html\n\nDisjoint with the `layoutsFiles` option.\n",
+    "loc": [
+      "zellij",
+      "layoutsContents"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<string>"
+  },
+  "zellij.layoutsFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zellij.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zellij.nix"
+      }
+    ],
+    "description": "Files containing custom layouts to be injected into the wrapped package.\n\nSee the documentation to learn how to make custom layouts and use them:\nhttps://zellij.dev/documentation/layouts.html\n\nDisjoint with the `layoutsContents` option.\n",
+    "loc": [
+      "zellij",
+      "layoutsFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
+  },
+  "zellij.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zellij.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zellij.nix"
+      }
+    ],
+    "description": "The zellij package to be wrapped.",
+    "loc": [
+      "zellij",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "zellij.themes": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zellij.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zellij.nix"
+      }
+    ],
+    "description": "Attribute set of themes to be injected into the wrapped package.\n\nSee the zellij documentation to learn how to make custom themes and use them:\nhttps://zellij.dev/documentation/themes.html\n\nEach attribute name is used as the theme name. The corresponding value must be\na folder or derivation whose top level contains a file named `<name>.kdl`.\n\nFor example, an entry `themes.dracula = <drv>;` where `<drv>` contains\n`dracula.kdl` will result in `themes/dracula.kdl`.\n",
+    "loc": [
+      "zellij",
+      "themes"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<pathLike>"
+  },
+  "zoxide.excludedDirs": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zoxide.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zoxide.nix"
+      }
+    ],
+    "description": "Directory globs that won't be added to the database when navigating with zoxide.\n",
+    "loc": [
+      "zoxide",
+      "excludedDirs"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "zoxide.flags": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zoxide.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zoxide.nix"
+      }
+    ],
+    "default": {
+      "_type": "literalExpression",
+      "text": "[ ]"
+    },
+    "description": "Flags to be automatically appended when creating the zoxide shell integration.\n\nSee the documentation of valid flags:\nhttps://github.com/ajeetdsouza/zoxide#flags\n",
+    "loc": [
+      "zoxide",
+      "flags"
+    ],
+    "readOnly": false,
+    "type": "listOf<string>"
+  },
+  "zoxide.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zoxide.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zoxide.nix"
+      }
+    ],
+    "description": "The zoxide package to be wrapped.",
+    "loc": [
+      "zoxide",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "zsh.aliases": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "Aliases to be defined in the wrapped package's `.zshrc` file. Aliases\ncan either be a string defining the command to be aliased, or a struct\nwhere you can define the command and if the alias should be global.\n\nSee the documentation for valid options:\nhttps://zsh.sourceforge.io/Intro/intro_8.html\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  G = {\n    command = \"| grep\";\n    global = true;\n  };\n  ls = \"ls --color\";\n}"
+    },
+    "loc": [
+      "zsh",
+      "aliases"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<union<string,global alias>>"
+  },
+  "zsh.extraPackages": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "Runtime dependencies to be injected into the wrapped package's path.\n",
+    "loc": [
+      "zsh",
+      "extraPackages"
+    ],
+    "readOnly": false,
+    "type": "listOf<derivation>"
+  },
+  "zsh.extraZshrc": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "zsh script to be injected after the `zshrcFiles` option in the wrapped\npackage's `.zshrc`.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "''\n  # zoxide must be added at the end of the .zshrc so we use extraZshrc.\n  # https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation\n  eval \"$(zoxide init zsh)\"\n''"
+    },
+    "loc": [
+      "zsh",
+      "extraZshrc"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "zsh.extraZshrcFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "zsh files to be sourced at the end of the wrapped package's `.zshrc` file.\n",
+    "loc": [
+      "zsh",
+      "extraZshrcFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
+  },
+  "zsh.package": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "The zsh package to be wrapped.",
+    "loc": [
+      "zsh",
+      "package"
+    ],
+    "readOnly": false,
+    "type": "derivation"
+  },
+  "zsh.plugins": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "Plugins to be appended to the wrapped package's `.zshrc`.\n\nIf a value is a derivation, it will be sourced as\n`<derivation>/share/<derivation.pname>/<derivation.pname>.zsh` which\nshould be compatible with the majority of plugins. If this path is\nincorrect then the value may be defined as an attrSet containing the\nattrs `package` and `path` and will be sourced as `<package>/<path>`.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "''\n  [\n    pkgs.zsh-autosuggestions\n    {\n      package = pkgs.nix-zsh-completions;\n      path = \"share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh\";\n    }\n  ];\n''"
+    },
+    "loc": [
+      "zsh",
+      "plugins"
+    ],
+    "readOnly": false,
+    "type": "listOf<union<derivation,plugin>>"
+  },
+  "zsh.settings": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "Options to be enabled or disabled in the wrapped package's `.zshrc` file.\n\nSee the documentation for valid options:\nhttps://zsh.sourceforge.io/Doc/Release/Options.html\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  appendhistory = true;\n  autocd = false;\n  beep = false;\n  sharehistory = true;\n}"
+    },
+    "loc": [
+      "zsh",
+      "settings"
+    ],
+    "readOnly": false,
+    "type": "attrsOf<bool>"
+  },
+  "zsh.variables": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "Environment variables to be defined in the wrapped package's `.zshrc` file.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "{\n  HISTFILE = \"~/.histfile\";\n  HISTSIZE = 5000;\n}"
+    },
+    "loc": [
+      "zsh",
+      "variables"
+    ],
+    "readOnly": false,
+    "type": "attrs"
+  },
+  "zsh.zshrc": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "zsh script to be injected into the wrapped package's `.zshrc`.\n",
+    "example": {
+      "_type": "literalExpression",
+      "text": "''\n  # Enable vim mode\n  bindkey -v\n  \n  # Enable completions. A custom zcompdump location must be used as the\n  # default location will be $ZDOTDIR which is immutable.\n  autoload -Uz compinit\n  compinit -d ~/.cache/zsh/.zcompdump -C\n''"
+    },
+    "loc": [
+      "zsh",
+      "zshrc"
+    ],
+    "readOnly": false,
+    "type": "string"
+  },
+  "zsh.zshrcFiles": {
+    "declarations": [
+      {
+        "name": "adios-wrappers/modules/zsh.nix",
+        "url": "https://github.com/llakala/adios-wrappers/blob/main/modules/zsh.nix"
+      }
+    ],
+    "description": "zsh files to be sourced after the `zshrc` option in the wrapped package's `.zshrc` file.\n",
+    "loc": [
+      "zsh",
+      "zshrcFiles"
+    ],
+    "readOnly": false,
+    "type": "listOf<pathLike>"
   }
 }
