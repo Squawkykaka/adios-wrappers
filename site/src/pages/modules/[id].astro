@@ -1,0 +1,26 @@
+---
+import { execSync } from 'child_process';
+
+export function getStaticPaths() {
+  const data = JSON.parse(
+    execSync('nix-instantiate --eval --strict --quiet --json ../dev/_get-docs.nix', { encoding: 'utf-8' })
+  );
+  return Object.keys(data).map(key => {
+    return {
+      params: { id: key },
+      props: { data: data[key] }
+    }
+  });
+}
+
+const { id } = Astro.params;
+const options = Astro.props.data;
+const option_names = Object.keys(options);
+---
+
+<div>This module is named {id}!</div>
+<div>It defines these options:</div>
+<li>
+  <!-- List the array of astronaut info -->
+  {option_names.map((key) => <div>{key}</div>)}
+</li>
