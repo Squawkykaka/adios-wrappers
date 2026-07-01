@@ -1,20 +1,17 @@
 ---
-import { execSync } from 'child_process';
+import { data } from '../data.js';
 
 export function getStaticPaths() {
-  const data = JSON.parse(
-    execSync('nix-instantiate --eval --strict --quiet --json ../dev/_get-docs.nix', { encoding: 'utf-8' })
-  );
   return Object.keys(data).map(key => {
     return {
       params: { id: key },
-      props: { data: data[key] }
+      props: { options: data[key] }
     }
   });
 }
 
 const { id } = Astro.params;
-const options = Astro.props.data;
+const { options } = Astro.props;
 const option_names = Object.keys(options);
 ---
 
