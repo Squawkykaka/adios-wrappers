@@ -1,23 +1,45 @@
 ---
-import { data } from '../data.js';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const modules = await getCollection("modules");
 
-export function getStaticPaths() {
-  return Object.keys(data).map(key => {
-    return {
-      params: { id: key },
-      props: { options: data[key] }
-    }
-  });
+  return modules.map((entry) => ({
+    params: { id: entry.id },
+    props: { module: entry.data },
+  }));
 }
 
 const { id } = Astro.params;
-const { options } = Astro.props;
-const option_names = Object.keys(options);
+const { module } = Astro.props;
 ---
 
-<div>This module is named {id}!</div>
-<div>It defines these options:</div>
-<li>
-  <!-- List the array of astronaut info -->
-  {option_names.map((key) => <div>{key}</div>)}
-</li>
+<div>
+  <h3>{id}</h3>
+  <details open>
+    <summary>Options</summary>
+    <li>
+      {
+        Object.entries(module.options).map(([name, option]) => (
+          <h4>{name}</h4>
+          <div>
+            <p>Type: <code>{option.type}</code></p>
+            <p>{option.description}</p>
+          </div>
+        ))
+      }
+    </li>
+  </details>
+  {
+    module.mutations && (
+      <details open>
+        <summary>Mutations</summary>
+        <ul>
+          {module.mutations}
+          {module.mutations.map((target) => {
+            <li>{target}</li>;
+          })}
+        </ul>
+      </details>
+    )
+  }
+</div>
