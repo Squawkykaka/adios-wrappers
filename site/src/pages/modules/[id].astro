@@ -1,6 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
-import { marked } from 'marked';
+import { getCollection } from "astro:content";
+import { marked } from "marked";
 export async function getStaticPaths() {
   const modules = await getCollection("modules");
 
@@ -12,23 +12,64 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 const { module } = Astro.props;
+
+async function renderExample(example: any): Promise<string> {
+  switch (typeof example) {
+    case "object":
+      return `<pre>${JSON.stringify(example, null, 2)}</pre>`;
+    case "string":
+      return `<pre>${example}</pre>`;
+
+    default:
+      return example;
+  }
+}
 ---
 
 <div>
-  <h3>{id}</h3>
+  <h2>{id}</h2>
   <details open>
     <summary>Options</summary>
-    <li>
+    <ul>
       {
         Object.entries(module.options).map(([name, option]) => (
-          <h4>{name}</h4>
-          <div>
-            <p>Type: <code>{option.type}</code></p>
-            {option.description && <p set:html={marked.parse(option.description)}></p>}
-          </div>
+          <li>
+            <details open>
+              <summary>{name}</summary>
+              {option.description && (
+                <p set:html={marked.parse(option.description)} />
+              )}
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <td>{option.type}</td>
+                  </tr>
+                  {option.mutatorType && (
+                    <tr>
+                      <th scope="col">Mutator Type</th>
+                      <td>{option.mutatorType}</td>
+                    </tr>
+                  )}
+                  {option.example && (
+                    <tr>
+                      <th scope="col">Example</th>
+                      <td set:html={renderExample(option.example)} />
+                    </tr>
+                  )}
+                  {option.default && (
+                    <tr>
+                      <th scope="col">Default</th>
+                      <td>{option.default}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </details>
+          </li>
         ))
       }
-    </li>
+    </ul>
   </details>
   {
     module.mutations && (
