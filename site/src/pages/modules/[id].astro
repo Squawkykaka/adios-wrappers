@@ -1,5 +1,6 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { marked } from 'marked';
 export async function getStaticPaths() {
   const modules = await getCollection("modules");
 
@@ -23,7 +24,7 @@ const { module } = Astro.props;
           <h4>{name}</h4>
           <div>
             <p>Type: <code>{option.type}</code></p>
-            <p>{option.description}</p>
+            {option.description && <p set:html={marked.parse(option.description)}></p>}
           </div>
         ))
       }
