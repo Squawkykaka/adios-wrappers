@@ -26,85 +26,91 @@ async function renderExample(example: any): Promise<string> {
 }
 ---
 
-<div>
-  <h2>{id}</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{id} - Adios Wrappers</title>
+</head>
+<body>
   <div>
-    <h3>Options</h3>
-    <dl>
-      {
-        Object.entries(module.options).map(([name, option]) => (
-          <dt><h4>{name}</h4></dt>
-          <dd>
-              {option.description && (
-                <p set:html={marked.parse(option.description)} />
-              )}
-              <table>
-                <tbody>
-                  <tr>
-                    <th scope="col">Type</th>
-                    <td>{option.type}</td>
-                  </tr>
-                  {option.mutatorType && (
-                    <tr>
-                      <th scope="col">Mutator Type</th>
-                      <td>{option.mutatorType}</td>
-                    </tr>
-                  )}
-                  {option.example && (
-                    <tr>
-                      <th scope="col">Example</th>
-                      <td set:html={renderExample(option.example)} />
-                    </tr>
-                  )}
-                  {option.default && (
-                    <tr>
-                      <th scope="col">Default</th>
-                      <td>{option.default}</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-          </dd>
-        ))
-      }
-    </dl>
+    <h2>{id}</h2>
+    <div>
+      <h3>Options</h3>
+      <dl>
+        {
+          Object.entries(module.options).map(([name, option]) => (
+            <dt><h4>{name}</h4></dt>
+            <dd>
+              <div set:html={option.description && marked.parse(option.description)}>
+  
+              </div >
+              <dl>
+                <dt>Type</dt>
+                <dd>{option.type}</dd>
+  
+                {option.mutatorType && (
+                    <dt>Mutator Type</dt>
+                    <dd>{option.mutatorType}</dd>
+                )}
+                {option.example && (
+                    <dt>Example</dt>
+                    <dd set:html={renderExample(option.example)} />
+                )}
+                {option.default && (
+                    <dt>Default</dt>
+                    <dd>{option.default}</dd>
+                )}
+              </dl>
+            </dd>
+          ))
+        }
+      </dl>
+    </div>
+    {
+      module.mutations && (
+        <div>
+          <h3>Mutations</h3>
+          <p>{module.mutations}</p>
+        </div>
+      )
+    }
   </div>
-  {
-    module.mutations && (
-      <div>
-        <h3>Mutations</h3>
-        <p>{module.mutations}</p>
-      </div>
-    )
-  }
-</div>
+  
+  <style>
+    li {
+      list-style: none;
+    }
+    ul {
+      padding: 0;
+    }
+  
+    dt {
+      font-weight: 600;
+    }
+  
+    details {
+      border: 1px solid #aaaaaa;
+      border-radius: 4px;
+      padding: 0.5em 0.5em 0;
+    }
+  
+    summary {
+      font-weight: bold;
+      margin: -0.5em -0.5em 0;
+      padding: 0.5em;
+    }
+  
+    details[open] {
+      padding: 0.5em;
+    }
+  
+    details[open] summary {
+      border-bottom: 1px solid #aaaaaa;
+      margin-bottom: 0.5em;
+    }
+  </style>
+</body>
+</html>
 
-<style>
-  li {
-    list-style: none;
-  }
-  ul {
-    padding: 0;
-  }
-
-  details {
-    border: 1px solid #aaaaaa;
-    border-radius: 4px;
-    padding: 0.5em 0.5em 0;
-  }
-
-  summary {
-    font-weight: bold;
-    margin: -0.5em -0.5em 0;
-    padding: 0.5em;
-  }
-
-  details[open] {
-    padding: 0.5em;
-  }
-
-  details[open] summary {
-    border-bottom: 1px solid #aaaaaa;
-    margin-bottom: 0.5em;
-  }
-</style>
