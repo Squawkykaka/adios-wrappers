@@ -1,23 +1,96 @@
 ---
-import { data } from '../data.js';
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+export async function getStaticPaths() {
+  const modules = await getCollection("modules");
 
-export function getStaticPaths() {
-  return Object.keys(data).map(key => {
-    return {
-      params: { id: key },
-      props: { options: data[key] }
-    }
-  });
+  return modules.map((entry) => ({
+    params: { id: entry.id },
+    props: { module: entry.data },
+  }));
 }
 
 const { id } = Astro.params;
-const { options } = Astro.props;
-const option_names = Object.keys(options);
+const { module } = Astro.props;
+
+async function renderExample(example: any): Promise<string> {
+  switch (typeof example) {
+    case "object":
+      return `<pre>${JSON.stringify(example, null, 2)}</pre>`;
+    case "string":
+      return `<pre>${example}</pre>`;
+
+    default:
+      return example;
+  }
+}
 ---
 
-<div>This module is named {id}!</div>
-<div>It defines these options:</div>
-<li>
-  <!-- List the array of astronaut info -->
-  {option_names.map((key) => <div>{key}</div>)}
-</li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{id} - Adios Wrappers</title>
+</head>
+<body>
+  <h1>{id}</h1>
+  <h2>Options</h2>
+  {
+    Object.entries(module.options).map(([name, option]) => (
+      <section class="option">
+        <h3>{name}</h3>
+
+        <div set:html={option.description && marked.parse(option.description)} />
+
+        <dl>
+          <dt>Type</dt>
+          <dd>{option.type}</dd>
+
+          {option.mutatorType && (
+              <dt>Mutator Type</dt>
+              <dd>{option.mutatorType}</dd>
+          )}
+          {option.example && (
+              <dt>Example</dt>
+              <dd set:html={renderExample(option.example)} />
+          )}
+          {option.default && (
+              <dt>Default</dt>
+              <dd>{option.default}</dd>
+          )}
+        </dl>
+      </section>
+    ))
+  }  
+
+  <style>
+    .option {
+      margin-bottom: 2rem;
+    }
+
+    h4 {
+      margin: 0;
+
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    dt {
+      font-weight: 600;
+      font-size: medium;
+    }
+
+    dd {
+      margin: 0 0 1rem 20px;
+    }
+
+    pre {
+      margin: 0.5rem 0;
+    }
+  </style>
+</body>
+</html>
+

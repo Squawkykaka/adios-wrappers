@@ -1,13 +1,35 @@
+---
+import { getCollection } from "astro:content";
+
+let modules = await getCollection("modules");
+---
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Hello</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Adios Wrappers</title>
+  </head>
+  <body>
+    <h1>Adios Wrappers</h1>
+    <ul>
+      {
+        modules.map((mod) => (
+          <li>
+            <a href={`./modules/${mod.id}`}>{mod.id}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </body>
+
+  <style>
+    h1 {
+      margin-bottom: 0;
+    }
+    li {
+      margin: 5px
+    }
+  </style>
 </html>
