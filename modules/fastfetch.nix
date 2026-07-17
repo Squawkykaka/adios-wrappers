@@ -40,7 +40,6 @@
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
-      inherit (inputs.nixpkgs.lib) optionals;
       generator = formats.json {};
     in
     assert !(options ? settings && options ? configFile);
@@ -55,7 +54,7 @@
           else
             null;
       };
-      flags = optionals (options ? configFile || options ? settings) [
+      ${if options ? configFile || options ? settings then "flags" else null} = [
         "--config"
         "$out/fastfetch/config.jsonc"
       ];

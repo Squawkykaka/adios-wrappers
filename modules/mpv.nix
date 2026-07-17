@@ -73,8 +73,10 @@
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText mpv;
-      inherit (inputs.nixpkgs.lib) generators concatStringsSep mapAttrsToList optionalString;
-      inherit (builtins) typeOf stringLength;
+      inherit (inputs.nixpkgs.lib) generators mapAttrsToList;
+      inherit (builtins) typeOf stringLength concatStringsSep;
+
+      optionalString = cond: string: if cond then string else "";
 
       # Most of this copied from https://github.com/nix-community/home-manager/blob/master/modules/programs/mpv.nix
       renderOption =

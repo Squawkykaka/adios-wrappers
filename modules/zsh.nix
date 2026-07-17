@@ -234,13 +234,13 @@
     in
     inputs.mkWrapper {
       inherit (options) package;
-      wrapperArgs =
-        if options ? extraPackages then "--prefix PATH : ${makeBinPath options.extraPackages}" else null;
+      ${if options ? extraPackages then "wrapperArgs" else null} =
+        "--prefix PATH : ${makeBinPath options.extraPackages}";
       symlinks = {
-        "$out/.zshrc" = if shouldConfigure then writeText ".zshrc" zshrc else null;
+        ${if shouldConfigure then "$out/.zshrc" else null} = writeText ".zshrc" zshrc;
       };
       environment = {
-        ZDOTDIR = if shouldConfigure then "$out" else null;
+        ${if shouldConfigure then "ZDOTDIR" else null} = "$out";
       };
     };
 
