@@ -186,9 +186,7 @@
           userInitLua =
             if options ? initLuaFile then "dofile('${options.initLuaFile}')" else options.initLuaContents;
         in
-        # can't be adios-wrappers, lua doesn't support `-` inside variables
         writeText "init.lua" /* lua */ ''
-          adioswrappers = { configDir = "$out" }
           vim.env.PATH = vim.env.PATH .. ":${makeBinPath (options.extraPackages or [])}"
           package.path = "${luaLib.genLuaPathAbsStr luaEnv};$LUA_PATH" .. package.path
           package.cpath = "${luaLib.genLuaCPathAbsStr luaEnv};$LUA_CPATH" .. package.cpath
@@ -198,7 +196,6 @@
 
       configDir = import ./configDir.nix inputs.nixpkgs.pkgs {
         inherit (options) package;
-        inherit generatedInitLua;
         startPlugins = transformedStartPlugins;
         optPlugins = options.optPlugins or {};
       };
@@ -231,7 +228,7 @@
       };
       pname = "neovim";
       binaryName = "nvim";
-      environment.VIMINIT = "source ${configDir}/init.lua";
+      environment.VIMINIT = "source ${generatedInitLua}";
       flags = [
         "--cmd"
         "lua vim.opt.packpath = '${packpath}'; vim.opt.runtimepath = '${runtimepath}'"

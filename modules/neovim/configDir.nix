@@ -8,7 +8,6 @@
   package,
   startPlugins,
   optPlugins,
-  generatedInitLua
 }:
 let
   inherit (lib) mapAttrsToList getExe;
@@ -47,7 +46,6 @@ stdenvNoCC.mkDerivation {
     else
       export LUA_CPATH="''${LUA_CPATH:-}"
     fi
-    envsubst < '${generatedInitLua}' > "$out/init.lua"
 
     tmpScript="$(mktemp)"
 
