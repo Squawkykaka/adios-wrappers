@@ -1,6 +1,6 @@
+# thank you to Gerg-L for his work on mnw, as most of the bash is copied from there.
 { types, ... }:
 {
-  # thank you to Gerg-L for his work on mnw, as most of the bash is copied from there.
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -145,7 +145,7 @@
         let
           removeVimPluginPrefix = removePrefix "vimplugin-";
           replaceDot = replaceStrings [ "." ] [ "-" ];
-          recurse =
+          recurse = concatMap (
             p:
             optionals (p != null) [
               {
@@ -157,10 +157,10 @@
                 value = p;
               }
             ]
-            ++ optionals (p ? dependencies) (concatMap recurse p.dependencies);
+            ++ optionals (p ? dependencies) (recurse p.dependencies)
+          );
         in
-        pluginAttrs:
-        listToAttrs (concatMap recurse (concatLists (catAttrs "dependencies" (attrValues pluginAttrs))));
+        pluginAttrs: listToAttrs (recurse (concatLists (catAttrs "dependencies" (attrValues pluginAttrs))));
 
       # TODO: consider checking that all attributes are unique / equal
       transformedStartPlugins =
@@ -182,7 +182,6 @@
         let
           luaEnv = options.package.lua.withPackages options.extraLuaPackages;
           inherit (options.package.lua.pkgs) luaLib;
-
           userInitLua =
             if options ? initLuaFile then "dofile('${options.initLuaFile}')" else options.initLuaContents;
         in
@@ -201,7 +200,7 @@
       };
 
       # we don't prepend/append to the defaults, since they load a bunch of
-      # impure state from xdg config
+      # impure state from xdg
       packpath = "${configDir},\\$VIMRUNTIME";
       runtimepath = concatStringsSep "," (
         [ configDir ]
