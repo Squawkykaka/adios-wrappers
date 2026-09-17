@@ -5,8 +5,6 @@
   };
 
   options = {
-    # this probably needs to be in the store? maybe a custom type utilizing
-    # lib.isStorePath
     initLuaFile = {
       type = types.pathLike;
       description = ''
@@ -94,7 +92,6 @@
         }
       '';
     };
-    # TODO: support hot reloading here too? is it even possible to do that?
     optPlugins = {
       type = types.attrsOf (types.either types.path types.derivation);
       description = ''
@@ -134,7 +131,6 @@
         substring
         ;
       inherit (inputs.nixpkgs.pkgs)
-        envsubst
         lndir
         # TODO: use makeBinaryWrapper?
         makeShellWrapper
@@ -145,11 +141,9 @@
       inherit (inputs.nixpkgs.lib)
         escapeShellArgs
         filterAttrs
-        getExe
         getName
         getVersion
         makeBinPath
-        mapAttrsToList
         removePrefix
         ;
 
@@ -240,88 +234,9 @@
 
       # TODO: maybe move this to another file, so wrapper is under
       # neovim/default.nix
-      configDir = stdenvNoCC.mkDerivation {
-        name = "neovim-configDir";
-        nativeBuildInputs = [ envsubst ];
-        __structuredAttrs = true;
-        preferLocalBuild = true;
-
-        sourcesArray =
-          (mapAttrsToList (_: v: "${v}") startPlugins) ++ (mapAttrsToList (_: v: "${v}") optPlugins);
-        pathsArray =
-          let
-            fn = name: mapAttrsToList (n: _: "pack/adios/${name}/" + n);
-          in
-          (fn "start" startPlugins) ++ (fn "opt" optPlugins);
-
-        buildCommand = /* bash */ ''
-          mkdir -p "$out/nix-support"
-          for i in $(find -L "$out" -name 'propagated-build-inputs'); do
-            cat "$i" >> "$out/nix-support/propagated-build-inputs"
-          done
-          source '${options.package.lua}/nix-support/utils.sh'
-          if declare -f -F "_addToLuaPath" > /dev/null; then
-            _addToLuaPath "$out"
-          fi
-
-          if [[ "$LUA_PATH" == ";;" ]]; then
-            export LUA_PATH=""
-          else
-            export LUA_PATH="''${LUA_PATH:-}"
-          fi
-          if [[ "$LUA_CPATH" == ";;" ]]; then
-            export LUA_CPATH=""
-          else
-            export LUA_CPATH="''${LUA_CPATH:-}"
-          fi
-          envsubst < '${generatedInitLua}' > "$out/init.lua"
-
-          tmpScript="$(mktemp)"
-
-          for ((i = 0; i < "''${#pathsArray[@]}"; i++ ))
-          do
-            path="''${pathsArray["$i"]}"
-            source="''${sourcesArray["$i"]}"
-            if [[ -e "$source/doc" && ! -e "$source/doc/tags" ]]; then
-              mkdir -p "$out/$path/doc"
-              ln -ns "$source/doc/"* -t "$out/$path/doc"
-              echo "packadd $(basename "$path")" >> "$tmpScript"
-            fi
-          done
-
-          ${getExe options.package} --headless -n -u NONE -i NONE \
-            -c "set packpath=$out" \
-            -c "source $tmpScript" \
-            -c "helptags ALL" \
-            "+quit!"
-
-          shopt -s extglob
-          for ((i = 0; i < "''${#pathsArray[@]}"; i++ ))
-          do
-            path="''${pathsArray["$i"]}"
-            source="''${sourcesArray["$i"]}"
-
-            mkdir -p "$out/$path"
-
-            tolink=("$source/"!(doc))
-
-            if (( ''${#tolink} )); then
-              ln -ns "''${tolink[@]}"  -t "$out/$path"
-            fi
-
-            if [[ -e "$source/doc" && ! -e "$out/$path/doc" ]]; then
-              ln -ns "$source/doc" -t "$out/$path"
-            fi
-          done
-          shopt -u extglob
-
-          for path in "$out/pack/adios/"*/*
-          do
-            if [[ -d "$path" && -z "$(ls -A $path)" ]]; then
-              rmdir $path
-            fi
-          done
-        '';
+      configDir = import ./configDir.nix inputs.nixpkgs.pkgs {
+        inherit (options) package;
+        inherit startPlugins optPlugins generatedInitLua;
       };
 
       wrapperArgsStr = escapeShellArgs [
