@@ -59,9 +59,23 @@
       default = _: [];
     };
     startPlugins = {
-      type = types.attrsOf types.pathLike;
+      type = types.attrsOf types.derivation;
       description = ''
         An attrset of neovim *plugins* which are loaded on startup.
+      '';
+    };
+    optPlugins = {
+      type = types.attrsOf types.derivation;
+      description = ''
+        A attrset of nvim plugins that are only loaded when `packadd` is called.
+
+        This follows the same ruleset as startPlugins.
+      '';
+    };
+    devPlugins = {
+      type = types.listOf (types.either types.path types.string);
+      description = ''
+        A list of neovim *plugins* which are loaded at runtime.
 
         Your personal config should be declared as a plugin here, and then loaded
         via the 'initLuaFile'/'initLuaContents' option:
@@ -78,29 +92,17 @@
         A plugin's structure is described [here](https://neovim.io/doc/user/pack/#package-create).
       '';
       example = ''
-        {
-          inherit (pkgs.vimPlugins) fzf-lua nvim-surround;
-          custom-plugin = pkgs.callPackage ./startPlugins/foo.nix {};
-
+        [
           # loading your personal config without hot reloading
-          myconfig = ./nvim;
+          ./nvim
           # alternatively, setting up hot reloading inside a flake
-          myconfig = "/home/your-username/Projects/nixos-config/wrappers/neovim/nvim";
+          "/home/your-username/Projects/nixos-config/wrappers/neovim/nvim"
           # and if you don't use flakes, this works too:
-          myconfig = toString ./nvim;
-        }
-      '';
-    };
-    optPlugins = {
-      type = types.attrsOf (types.either types.path types.derivation);
-      description = ''
-        A attrset of nvim plugins that are only loaded when `packadd` is called.
-
-        This follows the same ruleset as startPlugins, but doesn't support impure paths.
+          (toString ./nvim)
+        ]
       '';
     };
     treesitterPackage = {
-      # TODO: should this have a default?
       type = types.derivation;
       description = ''
         The nvim-treesitter package to be used.
@@ -120,17 +122,7 @@
   impl =
     { inputs, options }:
     let
-      inherit (builtins)
-        attrValues
-        baseNameOf
-        concatStringsSep
-        foldl'
-        hashString
-        isAttrs
-        isPath
-        isString
-        substring
-        ;
+      inherit (builtins) attrValues baseNameOf concatStringsSep foldl' hashString isAttrs substring;
       inherit (inputs.nixpkgs.pkgs) symlinkJoin writeText;
       inherit (inputs.nixpkgs.lib) filterAttrs getName makeBinPath removePrefix;
 
@@ -186,9 +178,7 @@
 
       optPlugins = transformedOpt.notDeps;
 
-      # TODO: dev plugins that were paths didn't seem to work for me. can we get
-      # this working? if not, should we go back to a separate option?
-      startPlugins = (filterAttrs (_: v: v != null && !isString v && !isPath v) startAttrs) // (
+      startPlugins = (filterAttrs (_: v: v != null) startAttrs) // (
         if options ? treesitterPackage then
           {
             nvim-treesitter-grammars = symlinkJoin {
@@ -200,7 +190,6 @@
         else
           {}
       );
-      devPlugins = filterAttrs (_: v: isString v || isPath v) startAttrs;
 
       generatedInitLua =
         let
@@ -240,12 +229,10 @@
       flags = [
         "--cmd"
         "lua vim.opt.packpath:prepend('${configDir}'); vim.opt.runtimepath:prepend('${configDir}'); ${
-          if devPlugins != {} then
+          if options ? devPlugins then
             ''
-              vim.opt.runtimepath:prepend('${
-                concatStringsSep "," (attrValues devPlugins)
-              }'); vim.opt.runtimepath:append('${
-                concatStringsSep "," (map (p: p + "/after") (attrValues devPlugins))
+              vim.opt.runtimepath:prepend('${concatStringsSep "," options.devPlugins}'); vim.opt.runtimepath:append('${
+                concatStringsSep "," (map (p: p + "/after") options.devPlugins)
               }')
             ''
           else
