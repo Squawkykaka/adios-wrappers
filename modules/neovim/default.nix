@@ -2,6 +2,7 @@
   # thank you to Gerg-L, for his work on mnw as most of the bash is copied from there.
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
+    mkWrapper.from = { parent }: parent.mkWrapper;
   };
 
   options = {
@@ -130,22 +131,8 @@
         isString
         substring
         ;
-      inherit (inputs.nixpkgs.pkgs)
-        lndir
-        # TODO: use makeBinaryWrapper?
-        makeShellWrapper
-        stdenvNoCC
-        symlinkJoin
-        writeText
-        ;
-      inherit (inputs.nixpkgs.lib)
-        escapeShellArgs
-        filterAttrs
-        getName
-        getVersion
-        makeBinPath
-        removePrefix
-        ;
+      inherit (inputs.nixpkgs.pkgs) symlinkJoin writeText;
+      inherit (inputs.nixpkgs.lib) filterAttrs getName makeBinPath removePrefix;
 
       transformPlugins =
         let
@@ -232,15 +219,22 @@
           ${sourceLua}
         '';
 
-      # TODO: maybe move this to another file, so wrapper is under
-      # neovim/default.nix
       configDir = import ./configDir.nix inputs.nixpkgs.pkgs {
         inherit (options) package;
         inherit startPlugins optPlugins generatedInitLua;
       };
-
-      wrapperArgsStr = escapeShellArgs [
-        "--add-flags"
+    in
+    assert options ? initLuaFile != options ? initLuaContents;
+    inputs.mkWrapper {
+      package = options.package // {
+        passthru = options.package.passthru // {
+          inherit configDir;
+          config = options;
+        };
+      };
+      binaryPath = "$out/bin/nvim";
+      environment.VIMINIT = "source ${configDir}/init.lua";
+      flags = [
         "--cmd \"lua vim.opt.packpath:prepend('${configDir}'); vim.opt.runtimepath:prepend('${configDir}'); ${
           if devPlugins != {} then
             ''
@@ -253,52 +247,12 @@
           else
             ""
         }\""
-        "--set"
-        "VIMINIT"
-        "source ${configDir}/init.lua"
       ];
-    in
-    assert options ? initLuaFile != options ? initLuaContents;
-    stdenvNoCC.mkDerivation {
-      pname = "neovim";
-      version = getVersion options.package;
-
-      dontUnpack = true;
-      preferLocalBuild = true;
-      strictDeps = true;
-      allowSubstitutes = false;
-      enableParallelBuilding = true;
-
-      dontFixup = true;
-
-      nativeBuildInputs = [
-        makeShellWrapper
-        lndir
-      ];
-
-      installPhase = ''
-        runHook preInstall
-
-        mkdir -p $out
-        lndir -silent '${options.package}' "$out"
-
-        wrapProgramShell "$out/bin/nvim" ${wrapperArgsStr}
-
+      postWrap = ''
         ${concatStringsSep "\n" (
           map (x: ''ln -s "$out/bin/nvim" "$out/bin/"'${x}' '') options.aliases or []
         )}
-
-        runHook postInstall
       '';
-
-      passthru = {
-        inherit configDir;
-        config = options;
-      };
-
-      meta = {
-        inherit (options.package.meta) mainProgram;
-      };
     };
 
   meta = {

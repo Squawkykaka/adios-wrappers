@@ -1,7 +1,6 @@
 {
   stdenvNoCC,
   envsubst,
-  getExe,
   lib,
   ...
 }:
@@ -12,7 +11,7 @@
   generatedInitLua
 }:
 let
-  inherit (lib) mapAttrsToList;
+  inherit (lib) mapAttrsToList getExe;
 in
 stdenvNoCC.mkDerivation {
   name = "neovim-configDir";
