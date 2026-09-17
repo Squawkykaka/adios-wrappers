@@ -23,7 +23,7 @@ stdenvNoCC.mkDerivation {
     (mapAttrsToList (_: v: "${v}") startPlugins) ++ (mapAttrsToList (_: v: "${v}") optPlugins);
   pathsArray =
     let
-      fn = name: mapAttrsToList (n: _: "pack/adios/${name}/" + n);
+      fn = name: mapAttrsToList (n: _: "pack/adios-wrappers/${name}/" + n);
     in
     (fn "start" startPlugins) ++ (fn "opt" optPlugins);
 
@@ -88,7 +88,7 @@ stdenvNoCC.mkDerivation {
     done
     shopt -u extglob
 
-    for path in "$out/pack/adios/"*/*
+    for path in "$out/pack/adios-wrappers/"*/*
     do
       if [[ -d "$path" && -z "$(ls -A $path)" ]]; then
         rmdir $path

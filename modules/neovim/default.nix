@@ -1,5 +1,6 @@
-{ types, ... }: {
-  # thank you to Gerg-L, for his work on mnw as most of the bash is copied from there.
+{ types, ... }:
+{
+  # thank you to Gerg-L for his work on mnw, as most of the bash is copied from there.
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -63,6 +64,12 @@
       description = ''
         An attrset of neovim *plugins* which are loaded on startup.
       '';
+      example = ''
+        {
+          inherit (vimPlugins) fzf-lua nvim-surround;
+          custom-plugin = callPackage ./custom-plugin.nix {};
+        }
+      '';
     };
     optPlugins = {
       type = types.attrsOf types.derivation;
@@ -75,7 +82,7 @@
     devPlugins = {
       type = types.listOf (types.either types.path types.string);
       description = ''
-        A list of neovim *plugins* which are loaded at runtime.
+        A list of *plugin* paths, which will be included in Neovim's 'runtimepath'.
 
         Your personal config should be declared as a plugin here, and then loaded
         via the 'initLuaFile'/'initLuaContents' option:
@@ -97,7 +104,7 @@
           ./nvim
           # alternatively, setting up hot reloading inside a flake
           "/home/your-username/Projects/nixos-config/wrappers/neovim/nvim"
-          # and if you don't use flakes, this works too:
+          # and if you don't use flakes, this works:
           (toString ./nvim)
         ]
       '';
@@ -122,81 +129,61 @@
   impl =
     { inputs, options }:
     let
-      inherit (builtins) attrValues baseNameOf concatStringsSep foldl' hashString isAttrs substring;
+      inherit (builtins)
+        attrValues
+        catAttrs
+        concatLists
+        concatMap
+        concatStringsSep
+        listToAttrs
+        replaceStrings
+        ;
       inherit (inputs.nixpkgs.pkgs) symlinkJoin writeText;
-      inherit (inputs.nixpkgs.lib) filterAttrs getName makeBinPath removePrefix;
+      inherit (inputs.nixpkgs.lib) getName makeBinPath optionals removePrefix;
 
-      transformPlugins =
+      getDependencies =
         let
+          removeVimPluginPrefix = removePrefix "vimplugin-";
+          replaceDot = replaceStrings [ "." ] [ "-" ];
           recurse =
-            parent: isDep:
-            foldl'
-              (
-                acc: e:
-                let
-                  name = removePrefix "vimplugin-" (
-                    if isAttrs e then getName e else "${baseNameOf e}-${substring 0 7 (hashString "md5" "${e}")}"
-                  );
-
-                  item.${name} = e;
-                in {
-                  deps = (
-                    if isDep then
-                      acc.deps // item
-                    else
-                      acc.deps
-                  )
-                  // (
-                    if e ? dependencies then
-                      (recurse name true e.dependencies).deps
-                    else
-                      {}
-                  );
-                  notDeps =
-                    if isDep then
-                      acc.notDeps
-                    else
-                      acc.notDeps // item;
-                }
-              )
+            p:
+            optionals (p != null) [
               {
-                deps = {};
-                notDeps = {};
-              };
+                # vimplugin-lualine.nvim -> lualine-nvim
+                # we turn dots into dashes for consistency with the attrset
+                # form. this will affect :packadd and lazy loaders, so be sure
+                # to use dashes instead of dots!
+                name = replaceDot (removeVimPluginPrefix (getName p));
+                value = p;
+              }
+            ]
+            ++ optionals (p ? dependencies) (concatMap recurse p.dependencies);
         in
-        recurse "" false;
+        pluginAttrs:
+        listToAttrs (concatMap recurse (concatLists (catAttrs "dependencies" (attrValues pluginAttrs))));
 
-      # TODO: this needs fixing, we're currently not using the benefits of the
-      # attrset form at all if we just take attrValues. whole idea is that the
-      # names are determined by the attribute names instead, we need to decide
-      # if that's valuable
-      transformedOpt = transformPlugins (attrValues (options.optPlugins or {}));
-      transformedStart = transformPlugins (attrValues (options.startPlugins or {}));
-      transformedTreesitter = transformPlugins [ options.treesitterPackage ];
-
-      startAttrs = transformedOpt.deps // transformedStart.deps // transformedStart.notDeps;
-
-      optPlugins = transformedOpt.notDeps;
-
-      startPlugins = (filterAttrs (_: v: v != null) startAttrs) // (
-        if options ? treesitterPackage then
-          {
-            nvim-treesitter-grammars = symlinkJoin {
-              name = "nvim-treesitter-grammars";
-              paths = attrValues transformedTreesitter.deps;
-            };
-          }
-          // transformedTreesitter.notDeps
-        else
-          {}
-      );
+      # TODO: consider checking that all attributes are unique / equal
+      transformedStartPlugins =
+        (getDependencies (options.startPlugins or {}))
+        # TODO: should deps of optional plugins also be loaded optionally?
+        // (getDependencies (options.optPlugins or {}))
+        // (options.startPlugins or {})
+        // {
+          nvim-treesitter = options.treesitterPackage;
+          nvim-treesitter-grammars = symlinkJoin {
+            name = "nvim-treesitter-grammars";
+            paths = attrValues (getDependencies {
+              nvim-treesitter = options.treesitterPackage;
+            });
+          };
+        };
 
       generatedInitLua =
         let
           luaEnv = options.package.lua.withPackages options.extraLuaPackages;
           inherit (options.package.lua.pkgs) luaLib;
 
-          sourceLua =
+          userInitLua =
             if options ? initLuaFile then "dofile('${options.initLuaFile}')" else options.initLuaContents;
         in
         # can't be adios-wrappers, lua doesn't support `-` inside variables
@@ -206,21 +193,40 @@
           package.path = "${luaLib.genLuaPathAbsStr luaEnv};$LUA_PATH" .. package.path
           package.cpath = "${luaLib.genLuaCPathAbsStr luaEnv};$LUA_CPATH" .. package.cpath
 
-          ${sourceLua}
+          ${userInitLua}
         '';
 
       configDir = import ./configDir.nix inputs.nixpkgs.pkgs {
         inherit (options) package;
-        inherit startPlugins optPlugins generatedInitLua;
+        inherit generatedInitLua;
+        startPlugins = transformedStartPlugins;
+        optPlugins = options.optPlugins or {};
       };
+
+      # we don't prepend/append to the defaults, since they load a bunch of
+      # impure state from xdg config
+      packpath = "${configDir},\\$VIMRUNTIME";
+      runtimepath = concatStringsSep "," (
+        [ configDir ]
+        ++ (options.devPlugins or [])
+        ++ [
+          "${options.package}/share/nvim/runtime"
+          "${options.package}/lib/nvim"
+        ]
+        ++ (map (p: p + "/after") (options.devPlugins or []))
+      );
     in
     assert options ? initLuaFile != options ? initLuaContents;
-    # TODO: should we set dontFixup, as mnw says it reduces build time? does it matter?
+    # TODO: should we assert this?
+    assert options ? treesitterPackage;
     inputs.mkWrapper {
+      # TODO: should we set dontFixup, as mnw says it reduces build time? does it matter?
       package = options.package // {
         passthru = options.package.passthru // {
           inherit configDir;
-          config = options;
+          config = options // {
+            startPlugins = transformedStartPlugins;
+          };
         };
       };
       pname = "neovim";
@@ -228,25 +234,17 @@
       environment.VIMINIT = "source ${configDir}/init.lua";
       flags = [
         "--cmd"
-        "lua vim.opt.packpath:prepend('${configDir}'); vim.opt.runtimepath:prepend('${configDir}'); ${
-          if options ? devPlugins then
-            ''
-              vim.opt.runtimepath:prepend('${concatStringsSep "," options.devPlugins}'); vim.opt.runtimepath:append('${
-                concatStringsSep "," (map (p: p + "/after") options.devPlugins)
-              }')
-            ''
-          else
-            ""
-        }"
+        "lua vim.opt.packpath = '${packpath}'; vim.opt.runtimepath = '${runtimepath}'"
       ];
-      postWrap = ''
-        ${concatStringsSep "\n" (
-          map (x: ''ln -s "$out/bin/nvim" "$out/bin/"'${x}' '') options.aliases or []
-        )}
-      '';
+      postWrap = concatStringsSep "\n" (
+        map (x: ''ln -s "$out/bin/nvim" "$out/bin/${x}"'') (options.aliases or [])
+      );
     };
 
   meta = {
-    maintainers = [ "Squawkykaka" ];
+    maintainers = [
+      "llakala"
+      "Squawkykaka"
+    ];
   };
 }
