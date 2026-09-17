@@ -9,25 +9,23 @@
     initLuaFile = {
       type = types.pathLike;
       description = ''
-        `init.lua` file to be ran on startup.
+        `init.lua` file to be run on startup.
 
         Disjoint with the initLuaContents option.
       '';
-      example = ''
-        (pkgs.writeText "init.lua" '''
-           print('hello world')
-         ''')
-      '';
+      example = "./init.lua";
     };
     initLuaContents = {
       type = types.string;
       description = ''
-        The contents of the `init.lua` file to be ran on startup.
+        The contents of the `init.lua` file to be run on startup.
 
         Disjoint with the initLuaFile option.
       '';
       example = ''
-        require("myConfig")
+        require("keybinds")
+        require("plugins")
+        require("options")
       '';
     };
     aliases = {
@@ -102,6 +100,7 @@
       '';
     };
     treesitterPackage = {
+      # TODO: should this have a default?
       type = types.derivation;
       description = ''
         The nvim-treesitter package to be used.
@@ -128,6 +127,7 @@
         foldl'
         hashString
         isAttrs
+        isPath
         isString
         substring
         ;
@@ -171,7 +171,6 @@
                 deps = {};
                 notDeps = {};
               };
-
         in
         recurse "" false;
 
@@ -187,7 +186,9 @@
 
       optPlugins = transformedOpt.notDeps;
 
-      startPlugins = (filterAttrs (_: v: v != null && !isString v) startAttrs) // (
+      # TODO: dev plugins that were paths didn't seem to work for me. can we get
+      # this working? if not, should we go back to a separate option?
+      startPlugins = (filterAttrs (_: v: v != null && !isString v && !isPath v) startAttrs) // (
         if options ? treesitterPackage then
           {
             nvim-treesitter-grammars = symlinkJoin {
@@ -199,7 +200,7 @@
         else
           {}
       );
-      devPlugins = filterAttrs (_: isString) startAttrs;
+      devPlugins = filterAttrs (_: v: isString v || isPath v) startAttrs;
 
       generatedInitLua =
         let
@@ -209,8 +210,8 @@
           sourceLua =
             if options ? initLuaFile then "dofile('${options.initLuaFile}')" else options.initLuaContents;
         in
+        # can't be adios-wrappers, lua doesn't support `-` inside variables
         writeText "init.lua" /* lua */ ''
-          -- cannot be adios-wrappers, lua does not support `-` inside variables
           adioswrappers = { configDir = "$out" }
           vim.env.PATH = vim.env.PATH .. ":${makeBinPath (options.extraPackages or [])}"
           package.path = "${luaLib.genLuaPathAbsStr luaEnv};$LUA_PATH" .. package.path
@@ -225,6 +226,7 @@
       };
     in
     assert options ? initLuaFile != options ? initLuaContents;
+    # TODO: should we set dontFixup, as mnw says it reduces build time? does it matter?
     inputs.mkWrapper {
       package = options.package // {
         passthru = options.package.passthru // {
@@ -232,10 +234,12 @@
           config = options;
         };
       };
-      binaryPath = "$out/bin/nvim";
+      pname = "neovim";
+      binaryName = "nvim";
       environment.VIMINIT = "source ${configDir}/init.lua";
       flags = [
-        "--cmd \"lua vim.opt.packpath:prepend('${configDir}'); vim.opt.runtimepath:prepend('${configDir}'); ${
+        "--cmd"
+        "lua vim.opt.packpath:prepend('${configDir}'); vim.opt.runtimepath:prepend('${configDir}'); ${
           if devPlugins != {} then
             ''
               vim.opt.runtimepath:prepend('${
@@ -246,7 +250,7 @@
             ''
           else
             ""
-        }\""
+        }"
       ];
       postWrap = ''
         ${concatStringsSep "\n" (
