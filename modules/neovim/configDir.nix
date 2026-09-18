@@ -4,11 +4,7 @@
   lib,
   ...
 }:
-{
-  package,
-  startPlugins,
-  optPlugins,
-}:
+{ package, startPlugins, optPlugins }:
 let
   inherit (lib) mapAttrsToList getExe;
 in
@@ -22,7 +18,7 @@ stdenvNoCC.mkDerivation {
     (mapAttrsToList (_: v: "${v}") startPlugins) ++ (mapAttrsToList (_: v: "${v}") optPlugins);
   pathsArray =
     let
-      fn = name: mapAttrsToList (n: _: "pack/adios-wrappers/${name}/" + n);
+      fn = name: mapAttrsToList (n: _: "pack/plugins/${name}/" + n);
     in
     (fn "start" startPlugins) ++ (fn "opt" optPlugins);
 
@@ -86,7 +82,8 @@ stdenvNoCC.mkDerivation {
     done
     shopt -u extglob
 
-    for path in "$out/pack/adios-wrappers/"*/*
+    mkdir -p $out/pack/plugins
+    for path in "$out/pack/plugins/"*/*
     do
       if [[ -d "$path" && -z "$(ls -A $path)" ]]; then
         rmdir $path

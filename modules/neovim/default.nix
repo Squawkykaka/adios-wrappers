@@ -140,6 +140,7 @@
         ;
       inherit (inputs.nixpkgs.pkgs) symlinkJoin writeText;
       inherit (inputs.nixpkgs.lib) getName makeBinPath optionals removePrefix;
+      toLua = inputs.nixpkgs.lib.generators.toLua {};
 
       getDependencies =
         let
@@ -162,10 +163,11 @@
         in
         pluginAttrs: listToAttrs (recurse (concatLists (catAttrs "dependencies" (attrValues pluginAttrs))));
 
-      # TODO: consider checking that all attributes are unique / equal
+      # we do a simple merge here, where start plugins take precedence over
+      # discovered dependencies
       transformedStartPlugins =
         (getDependencies (options.startPlugins or {}))
-        # TODO: should deps of optional plugins also be loaded optionally?
+        # deps of opt plugins are loaded as start plugins - preserves mnw compat
         // (getDependencies (options.optPlugins or {}))
         // (options.startPlugins or {})
         // {
@@ -178,45 +180,50 @@
           };
         };
 
-      generatedInitLua =
-        let
-          luaEnv = options.package.lua.withPackages options.extraLuaPackages;
-          inherit (options.package.lua.pkgs) luaLib;
-          userInitLua =
-            if options ? initLuaFile then "dofile('${options.initLuaFile}')" else options.initLuaContents;
-        in
-        writeText "init.lua" /* lua */ ''
-          vim.env.PATH = vim.env.PATH .. ":${makeBinPath (options.extraPackages or [])}"
-          package.path = "${luaLib.genLuaPathAbsStr luaEnv};$LUA_PATH" .. package.path
-          package.cpath = "${luaLib.genLuaCPathAbsStr luaEnv};$LUA_CPATH" .. package.cpath
-
-          ${userInitLua}
-        '';
-
+      # more of a plugin dir than a config dir, but we keep mnw's naming
+      # scheme
       configDir = import ./configDir.nix inputs.nixpkgs.pkgs {
         inherit (options) package;
         startPlugins = transformedStartPlugins;
         optPlugins = options.optPlugins or {};
       };
 
-      # we don't prepend/append to the defaults, since they load a bunch of
-      # impure state from xdg
-      packpath = "${configDir},\\$VIMRUNTIME";
-      runtimepath = concatStringsSep "," (
-        [ configDir ]
-        ++ (options.devPlugins or [])
-        ++ [
-          "${options.package}/share/nvim/runtime"
-          "${options.package}/lib/nvim"
-        ]
-        ++ (map (p: p + "/after") (options.devPlugins or []))
-      );
+      generatedInitLua =
+        let
+          luaEnv = options.package.lua.withPackages options.extraLuaPackages;
+          inherit (options.package.lua.pkgs) luaLib;
+          userInitLua =
+            if options ? initLuaFile then "dofile('${options.initLuaFile}')" else options.initLuaContents;
+          # we don't prepend/append to the defaults, since they load a bunch of
+          # impure state from xdg
+          packpath = toLua [
+            configDir
+            "${options.package}/share/nvim/runtime"
+          ];
+          runtimepath = toLua (
+            [ configDir ]
+            ++ (options.devPlugins or [])
+            ++ [
+              "${options.package}/share/nvim/runtime"
+              "${options.package}/lib/nvim"
+            ]
+            ++ (map (p: p + "/after") (options.devPlugins or []))
+          );
+        in
+        writeText "init.lua" /* lua */ ''
+          vim.env.PATH = vim.env.PATH .. ":${makeBinPath (options.extraPackages or [])}"
+          package.path = "${luaLib.genLuaPathAbsStr luaEnv};$LUA_PATH" .. package.path
+          package.cpath = "${luaLib.genLuaCPathAbsStr luaEnv};$LUA_CPATH" .. package.cpath
+          vim.opt.packpath = ${packpath}
+          vim.opt.runtimepath = ${runtimepath}
+
+          ${userInitLua}
+        '';
     in
     assert options ? initLuaFile != options ? initLuaContents;
-    # TODO: should we assert this?
-    assert options ? treesitterPackage;
     inputs.mkWrapper {
-      # TODO: should we set dontFixup, as mnw says it reduces build time? does it matter?
+      pname = "neovim";
+      binaryName = "nvim";
       package = options.package // {
         passthru = options.package.passthru // {
           inherit configDir;
@@ -225,13 +232,11 @@
           };
         };
       };
-      pname = "neovim";
-      binaryName = "nvim";
-      environment.VIMINIT = "source ${generatedInitLua}";
-      flags = [
-        "--cmd"
-        "lua vim.opt.packpath = '${packpath}'; vim.opt.runtimepath = '${runtimepath}'"
-      ];
+      environment.VIMINIT = "source $out/share/nvim/init.lua";
+      symlinks = {
+        "$out/share/nvim/init.lua" = generatedInitLua;
+        "$out/share/nvim/plugins" = "${configDir}/pack/plugins";
+      };
       postWrap = concatStringsSep "\n" (
         map (x: ''ln -s "$out/bin/nvim" "$out/bin/${x}"'') (options.aliases or [])
       );
