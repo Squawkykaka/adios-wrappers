@@ -180,9 +180,7 @@
           };
         };
 
-      # more of a plugin dir than a config dir, but we keep mnw's naming
-      # scheme
-      configDir = import ./configDir.nix inputs.nixpkgs.pkgs {
+      pluginDir = import ./pluginDir.nix inputs.nixpkgs.pkgs {
         inherit (options) package;
         startPlugins = transformedStartPlugins;
         optPlugins = options.optPlugins or {};
@@ -197,11 +195,11 @@
           # we don't prepend/append to the defaults, since they load a bunch of
           # impure state from xdg
           packpath = toLua [
-            configDir
+            pluginDir
             "${options.package}/share/nvim/runtime"
           ];
           runtimepath = toLua (
-            [ configDir ]
+            [ pluginDir ]
             ++ (options.devPlugins or [])
             ++ [
               "${options.package}/share/nvim/runtime"
@@ -226,7 +224,7 @@
       binaryName = "nvim";
       package = options.package // {
         passthru = options.package.passthru // {
-          inherit configDir;
+          inherit pluginDir;
           config = options // {
             startPlugins = transformedStartPlugins;
           };
@@ -235,7 +233,7 @@
       environment.VIMINIT = "source $out/share/nvim/init.lua";
       symlinks = {
         "$out/share/nvim/init.lua" = generatedInitLua;
-        "$out/share/nvim/plugins" = "${configDir}/pack/plugins";
+        "$out/share/nvim/plugins" = "${pluginDir}/pack/plugins";
       };
       postWrap = concatStringsSep "\n" (
         map (x: ''ln -s "$out/bin/nvim" "$out/bin/${x}"'') (options.aliases or [])

@@ -6,19 +6,20 @@
 }:
 { package, startPlugins, optPlugins }:
 let
-  inherit (lib) mapAttrsToList getExe;
+  inherit (lib) attrNames attrValues getExe map;
 in
 stdenvNoCC.mkDerivation {
-  name = "neovim-configDir";
+  name = "neovim-pluginDir";
   nativeBuildInputs = [ envsubst ];
+
   __structuredAttrs = true;
   preferLocalBuild = true;
+  allowSubstitutes = true;
 
-  sourcesArray =
-    (mapAttrsToList (_: v: "${v}") startPlugins) ++ (mapAttrsToList (_: v: "${v}") optPlugins);
+  sourcesArray = attrValues startPlugins ++ attrValues optPlugins;
   pathsArray =
     let
-      fn = name: mapAttrsToList (n: _: "pack/plugins/${name}/" + n);
+      fn = name: ps: map (p: "pack/plugins/${name}/" + p) (attrNames ps);
     in
     (fn "start" startPlugins) ++ (fn "opt" optPlugins);
 
