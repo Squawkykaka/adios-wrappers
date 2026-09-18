@@ -44,8 +44,9 @@
       description = "A list of extra packages to be included in neovim's $PATH";
       example = ''
         with inputs.nixpkgs; [
-          pkgs.rg
-          pkgs.fzf
+          pkgs.lua-language-server
+          pkgs.stylua
+          pkgs.nixfmt
         ]
       '';
     };
@@ -200,7 +201,7 @@
               "${options.package}/share/nvim/runtime"
               "${options.package}/lib/nvim"
             ]
-            ++ (map (p: p + "/after") (options.devPlugins or []))
+            ++ map (p: p + "/after") (options.devPlugins or [])
           );
         in
         writeText "init.lua" /* lua */ ''
