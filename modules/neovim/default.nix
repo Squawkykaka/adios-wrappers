@@ -87,11 +87,6 @@
         Your personal config should be declared as a plugin here, and then loaded
         via the 'initLuaFile'/'initLuaContents' option:
 
-        ```lua
-        -- this loads nvim/lua/init.lua
-        require("init")
-        ```
-
         Plugins that are set to strings will be treated as absolute paths
         and loaded impurely at runtime, rather than at buildtime. This allows
         for "hot reloading", which is helpful inside a devshell.
@@ -139,7 +134,7 @@
         replaceStrings
         ;
       inherit (inputs.nixpkgs.pkgs) symlinkJoin writeText;
-      inherit (inputs.nixpkgs.lib) getName makeBinPath optionals removePrefix;
+      inherit (inputs.nixpkgs.lib) getName makeBinPath optionalAttrs optionals removePrefix;
       toLua = inputs.nixpkgs.lib.generators.toLua {};
 
       getDependencies =
@@ -170,7 +165,7 @@
         # deps of opt plugins are loaded as start plugins - preserves mnw compat
         // (getDependencies (options.optPlugins or {}))
         // (options.startPlugins or {})
-        // {
+        // optionalAttrs (options ? treesitterPackage) {
           nvim-treesitter = options.treesitterPackage;
           nvim-treesitter-grammars = symlinkJoin {
             name = "nvim-treesitter-grammars";
