@@ -78,7 +78,7 @@
   ];
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options }:
       # fish
       ''
@@ -86,7 +86,8 @@
         # don't preserve attributes like this
         source "${options.package.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
         set --prepend fish_complete_path "${options.package.shell_integration}/fish/vendor_completions.d"
-      '';
+      ''
+    );
   };
 
   result = promise (

@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 let
   inherit (builtins) concatStringsSep;
   command =
@@ -39,16 +39,18 @@ in {
   };
 
   mutations = {
-    "/fish".interactiveShellInit = { options }: "eval (${command options})";
-    "/zsh".zshrc = { options }: ''eval "$(${command options})"'';
+    "/fish".interactiveShellInit = promise ({ options }: "eval (${command options})");
+    "/zsh".zshrc = promise ({ options }: ''eval "$(${command options})"'');
     # Adapted from hm
     # https://github.com/nix-community/home-manager/blob/aa308770461dcf22c333a5e8a31c8bddbde5bee9/modules/programs/keychain.nix#L115
-    "/nushell".shellInit = { options }: ''
-      let keychain_shell_command = (SHELL=bash ${command options}| parse -r '(\w+)="?(.*?)"?; export \1' | transpose -ird)
-      if not ($keychain_shell_command|is-empty) {
-        $keychain_shell_command | load-env
-      }
-    '';
+    "/nushell".shellInit = promise (
+      { options }: ''
+        let keychain_shell_command = (SHELL=bash ${command options}| parse -r '(\w+)="?(.*?)"?; export \1' | transpose -ird)
+        if not ($keychain_shell_command|is-empty) {
+          $keychain_shell_command | load-env
+        }
+      ''
+    );
   };
 
   meta = {

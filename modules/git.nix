@@ -60,11 +60,12 @@
   ];
 
   mutations = {
-    "/starship".wrapperAttrs =
+    "/starship".wrapperAttrs = promise (
       { options }:
       {
         environment.XDG_CONFIG_HOME = options {};
-      };
+      }
+    );
   };
 
   result = promise (

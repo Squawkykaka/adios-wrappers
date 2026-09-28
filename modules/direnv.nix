@@ -60,7 +60,7 @@
   };
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
@@ -68,11 +68,12 @@
       in
       ''
         ${getExe finalWrapper} hook fish | source
-      '';
+      ''
+    );
 
     # shell configuration for nushell, uses home managers config since
     # direnv doesnt have a command to generate
-    "/nushell".shellInit =
+    "/nushell".shellInit = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
@@ -106,7 +107,8 @@
                 | load-env
             }
         )
-      '';
+      ''
+    );
   };
 
   result = promise (

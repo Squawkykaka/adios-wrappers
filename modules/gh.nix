@@ -52,14 +52,15 @@
   ];
 
   mutations = {
-    "/git".settings =
+    "/git".settings = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
         finalWrapper = options {};
       in {
         credential."https://github.com".helper = "${getExe finalWrapper} auth git-credential";
-      };
+      }
+    );
   };
 
   result = promise (

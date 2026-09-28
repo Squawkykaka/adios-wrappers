@@ -71,7 +71,7 @@
   ];
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options, inputs }:
       let
         finalWrapper = options {};
@@ -82,7 +82,8 @@
         ${getExe finalWrapper} init fish --print-full-init \
           | string replace --all "${getExe options.package}" "${getExe finalWrapper}" \
           | source
-      '';
+      ''
+    );
   };
 
   result = promise ({ options, inputs }: inputs.mkWrapper options.wrapperAttrs);

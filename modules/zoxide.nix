@@ -31,7 +31,7 @@
   };
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
@@ -41,7 +41,8 @@
       # fish
       ''
         ${getExe finalWrapper} init fish ${concatStringsSep " " options.flags} | source
-      '';
+      ''
+    );
   };
 
   result = promise (
