@@ -143,7 +143,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zsh;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zsh);
       description = "The zsh package to be wrapped.";
     };
   };

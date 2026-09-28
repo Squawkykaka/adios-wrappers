@@ -38,7 +38,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.fd;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.fd);
       description = "The fd package to be wrapped.";
     };
   };

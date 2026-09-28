@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.fastfetch;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.fastfetch);
       description = "The fastfetch package to be wrapped.";
     };
   };

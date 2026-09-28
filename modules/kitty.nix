@@ -66,7 +66,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.kitty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.kitty);
       description = "The kitty package to be wrapped.";
     };
   };

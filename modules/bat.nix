@@ -25,7 +25,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.bat;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.bat);
       description = "The bat package to be wrapped.";
     };
   };

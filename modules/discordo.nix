@@ -47,7 +47,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.discordo;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.discordo);
       description = "The discordo package to be wrapped.";
     };
   };

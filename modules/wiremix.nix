@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.wiremix;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.wiremix);
       description = "The wiremix package to be wrapped.";
     };
   };

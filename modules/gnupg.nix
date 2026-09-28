@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.gnupg;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.gnupg);
       description = "The gnupg package to be wrapped.";
     };
   };

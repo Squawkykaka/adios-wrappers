@@ -58,7 +58,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zathura;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zathura);
       description = "The zathura package to be wrapped.";
     };
   };

@@ -52,7 +52,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.hayabusa;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.hayabusa);
       description = "The hayabusa package to be wrapped";
     };
   };

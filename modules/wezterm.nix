@@ -38,7 +38,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.wezterm;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.wezterm);
       description = "The wezterm package to be wrapped.";
     };
   };

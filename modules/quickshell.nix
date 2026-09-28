@@ -18,7 +18,7 @@
     };
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.quickshell;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.quickshell);
       description = "The quickshell package to be wrapped.";
     };
   };

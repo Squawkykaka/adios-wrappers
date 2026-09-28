@@ -67,7 +67,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.fuzzel;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.fuzzel);
       description = "The fuzzel package to be wrapped.";
     };
   };

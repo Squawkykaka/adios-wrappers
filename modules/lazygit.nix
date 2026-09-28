@@ -31,7 +31,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.lazygit;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.lazygit);
       description = "The lazygit package to be wrapped.";
     };
   };

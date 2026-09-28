@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.bluetui;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.bluetui);
       description = "The bluetui package to be wrapped.";
     };
   };

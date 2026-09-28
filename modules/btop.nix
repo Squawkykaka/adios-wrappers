@@ -33,7 +33,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.btop;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.btop);
       description = "The btop package to be wrapped.";
     };
   };

@@ -105,7 +105,7 @@ let
       };
       age-someday = {
         type = types.int;
-        defaultFunc = { options }: options.age + 1;
+        default = promise ({ options }: options.age + 1);
       };
     };
 
@@ -123,7 +123,7 @@ let
     options = {
       age.default = 35;
       age-someday.type = types.float;
-      age-someday.defaultFunc = { options }: options.age + 0.1;
+      age-someday.default = promise ({ options }: options.age + 0.1);
     };
   };
 

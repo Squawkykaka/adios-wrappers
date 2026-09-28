@@ -33,7 +33,7 @@ in {
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.keychain;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.keychain);
       description = "The keychain package to wrap.";
     };
   };

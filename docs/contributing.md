@@ -75,7 +75,7 @@ Here's an example module that adds both:
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.foo;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.foo);
       description = "The foo package to be wrapped.";
     };
   };

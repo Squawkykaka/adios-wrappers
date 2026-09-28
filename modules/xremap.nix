@@ -40,7 +40,7 @@
         The xremap package to be wrapped.
         Note that this should match the version for your desktop environment or compositor.
       '';
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.xremap;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.xremap);
     };
   };
 

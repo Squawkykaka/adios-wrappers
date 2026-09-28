@@ -78,7 +78,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.helix;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.helix);
       description = "The helix package to be wrapped.";
     };
   };

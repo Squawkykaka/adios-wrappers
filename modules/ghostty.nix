@@ -35,7 +35,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.ghostty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.ghostty);
       description = "The ghostty package to be wrapped.";
     };
   };

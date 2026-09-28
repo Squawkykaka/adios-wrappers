@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.satty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.satty);
       description = "The Satty package to be wrapped.";
     };
   };

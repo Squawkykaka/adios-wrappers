@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.tealdeer;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.tealdeer);
       description = "The tealdeer package to be wrapped.";
     };
   };

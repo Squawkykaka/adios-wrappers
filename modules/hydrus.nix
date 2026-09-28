@@ -31,7 +31,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.hydrus;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.hydrus);
       description = "The hydrus package to be wrapped.";
     };
   };

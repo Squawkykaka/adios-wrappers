@@ -18,7 +18,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.niri;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.niri);
       description = "The niri package to be wrapped.";
     };
   };

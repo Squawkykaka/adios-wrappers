@@ -33,7 +33,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.hyfetch;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.hyfetch);
       description = "The hyfetch package to be wrapped.";
     };
   };

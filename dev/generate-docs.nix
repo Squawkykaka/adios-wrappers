@@ -19,8 +19,14 @@ mapAttrs (_: wrapper: {
     removeAttrs option keysToRemove
     // {
       type = option.type.name;
-      # functions can't be serialized to JSON
-      ${if option ? default && !isFunction option.default then "default" else null} = option.default;
+      # functions and promises can't be serialized to JSON
+      ${
+        if option ? default && !isFunction option.default && !option.default ? __adiosPromise then
+          "default"
+        else
+          null
+      } =
+        option.default;
     }
   ) wrapper.options;
 }) filteredModules

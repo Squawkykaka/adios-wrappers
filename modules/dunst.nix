@@ -38,7 +38,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.dunst;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.dunst);
       description = "The dunst package to be wrapped.";
     };
   };

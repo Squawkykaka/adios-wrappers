@@ -61,7 +61,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.starship;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.starship);
       description = "The starship package to be wrapped.";
     };
   };

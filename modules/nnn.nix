@@ -36,7 +36,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.nnn;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.nnn);
       description = "The nnn package to be wrapped.";
     };
   };

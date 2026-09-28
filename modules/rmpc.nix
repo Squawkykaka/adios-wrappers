@@ -38,7 +38,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.rmpc;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.rmpc);
       description = "The rmpc package to be wrapped.";
     };
   };

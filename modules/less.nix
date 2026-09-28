@@ -34,7 +34,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.less;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.less);
       description = "The less package to be wrapped.";
     };
   };

@@ -25,7 +25,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zoxide;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zoxide);
       description = "The zoxide package to be wrapped.";
     };
   };

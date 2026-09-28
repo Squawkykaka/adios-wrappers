@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   options = {
     pkgs = {
@@ -6,7 +6,7 @@
     };
     lib = {
       type = types.attrs;
-      defaultFunc = { options }: options.pkgs.lib;
+      default = promise ({ options }: options.pkgs.lib);
     };
   };
 

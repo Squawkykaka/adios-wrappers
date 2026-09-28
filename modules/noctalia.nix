@@ -32,7 +32,7 @@
     package = {
       type = types.derivation;
       description = "The noctalia package to be wrapped.";
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.noctalia;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.noctalia);
     };
   };
 

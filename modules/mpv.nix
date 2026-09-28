@@ -57,7 +57,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.mpv-unwrapped;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.mpv-unwrapped);
       description = ''
         The mpv package to be wrapped.
         Note that this should use a `-unwrapped` variant.

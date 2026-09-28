@@ -13,7 +13,7 @@ in {
     };
     pname = {
       type = types.string;
-      defaultFunc = { options }: options.package.pname;
+      default = promise ({ options }: options.package.pname);
       description = ''
         The name of the package to be wrapped.
       '';
@@ -30,11 +30,11 @@ in {
 
         This sets the `meta.mainProgram` of the wrapped package, and the sole entry of `binaryPaths` to wrap with.
       '';
-      defaultFunc = { options }: options.package.meta.mainProgram or options.pname;
+      default = promise ({ options }: options.package.meta.mainProgram or options.pname);
     };
     binaryPaths = {
       type = types.listOf types.string;
-      defaultFunc = { options }: [ "$out/bin/${options.binaryName}" ];
+      default = promise ({ options }: [ "$out/bin/${options.binaryName}" ]);
       description = ''
         The path of the binaries within the input derivation to be wrapped.
 

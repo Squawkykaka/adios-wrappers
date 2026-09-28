@@ -62,7 +62,7 @@
     package = {
       type = types.derivation;
       description = "The ReGreet package to be wrapped.";
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.regreet;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.regreet);
     };
   };
 

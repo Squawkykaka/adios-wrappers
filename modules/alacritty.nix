@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.alacritty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.alacritty);
       description = "The alacritty package to be wrapped.";
     };
   };

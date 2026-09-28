@@ -68,7 +68,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zellij;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zellij);
       description = "The zellij package to be wrapped.";
     };
   };

@@ -34,7 +34,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.swayidle;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.swayidle);
       description = "The swayidle package to be wrapped.";
     };
   };

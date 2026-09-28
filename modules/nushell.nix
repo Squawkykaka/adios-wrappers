@@ -34,7 +34,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.nushell;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.nushell);
       description = "The nushell package to be wrapped.";
     };
   };

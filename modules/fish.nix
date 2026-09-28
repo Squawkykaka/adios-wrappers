@@ -161,7 +161,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.fish;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.fish);
       description = "The Fish package to be wrapped.";
     };
   };

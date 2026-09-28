@@ -54,7 +54,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.irssi;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.irssi);
       description = "The irssi package to be wrapped.";
     };
   };

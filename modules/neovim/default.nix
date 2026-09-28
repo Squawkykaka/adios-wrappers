@@ -118,7 +118,7 @@
     package = {
       type = types.derivation;
       description = "The neovim package to be wrapped.";
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.neovim-unwrapped;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.neovim-unwrapped);
     };
   };
 

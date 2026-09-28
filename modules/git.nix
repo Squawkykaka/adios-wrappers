@@ -49,7 +49,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.git;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.git);
       description = "The git package to be wrapped.";
     };
   };

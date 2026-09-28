@@ -50,7 +50,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.mango;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.mango);
       description = "The mangowc package to be wrapped.";
     };
   };

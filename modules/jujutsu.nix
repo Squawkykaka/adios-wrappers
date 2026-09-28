@@ -37,7 +37,7 @@
     };
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.jujutsu;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.jujutsu);
       description = "The jujutsu package to be wrapped.";
     };
   };

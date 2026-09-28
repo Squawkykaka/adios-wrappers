@@ -46,7 +46,7 @@
 
     nix-direnv = {
       type = types.nullOr types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.nix-direnv;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.nix-direnv);
       description = ''
         The nix-direnv package to integrate with the wrapped package, or null for no integration.
       '';
@@ -54,7 +54,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.direnv;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.direnv);
       description = "The direnv package to be wrapped.";
     };
   };

@@ -37,7 +37,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.gh;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.gh);
       description = "The gh package to be wrapped.";
     };
   };

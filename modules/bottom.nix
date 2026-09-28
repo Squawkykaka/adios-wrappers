@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.bottom;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.bottom);
       description = "The bottom package to be wrapped.";
     };
   };

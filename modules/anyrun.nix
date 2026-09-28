@@ -57,7 +57,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.anyrun;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.anyrun);
       description = "The anyrun package to be wrapped.";
     };
   };

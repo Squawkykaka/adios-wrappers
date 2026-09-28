@@ -37,7 +37,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.eza;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.eza);
       description = "The eza package to be wrapped.";
     };
   };

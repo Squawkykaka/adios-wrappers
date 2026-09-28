@@ -31,7 +31,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.ripgrep;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.ripgrep);
       description = "The ripgrep package to be wrapped.";
     };
   };
