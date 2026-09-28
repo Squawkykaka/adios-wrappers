@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -148,7 +148,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -224,7 +224,8 @@
       environment = {
         ZDOTDIR = if shouldConfigure then "$out" else null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

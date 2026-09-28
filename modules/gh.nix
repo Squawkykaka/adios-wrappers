@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -62,7 +62,7 @@
       };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) mapAttrs;
@@ -103,7 +103,8 @@
         environment = {
           GH_CONFIG_DIR = "$out/gh";
         };
-      };
+      }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

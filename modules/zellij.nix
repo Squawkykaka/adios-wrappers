@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -78,7 +78,7 @@
     (assertions.disjoint "layoutsContents" "layoutsFiles")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) listToAttrs attrNames;
@@ -125,7 +125,8 @@
       environment = {
         ZELLIJ_CONFIG_DIR = "$out/zellij-config";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [

@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -66,7 +66,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.lib) makeSearchPath optionals;
@@ -113,7 +113,8 @@
           "--prefix XDG_DATA_DIRS : ${makeSearchPath "share" options.extraPackages}"
         else
           null;
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "EpicEric" ];

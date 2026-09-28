@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -14,7 +14,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       gitWrapper = inputs.git {};
@@ -25,7 +25,8 @@
         # If you don't have this, diff-so-fancy can't find your gitconfig
         GIT_CONFIG_GLOBAL = "${gitWrapper}/git/config";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

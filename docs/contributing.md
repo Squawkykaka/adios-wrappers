@@ -84,7 +84,7 @@ Here's an example module that adds both:
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -103,7 +103,8 @@ Here's an example module that adds both:
       environment = {
         FOO_CONFIG_FILE = "$out/foo/foo.toml";
       };
-    };
+    }
+  );
 }
 ```
 

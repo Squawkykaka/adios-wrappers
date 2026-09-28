@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -36,7 +36,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -53,7 +53,8 @@
           ''
         else
           "";
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -149,7 +149,7 @@
     (assertions.disjoint "initLua" "initLuaFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) pkgs writeText;
@@ -211,7 +211,8 @@
       environment = {
         YAZI_CONFIG_HOME = "$out/yazi";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

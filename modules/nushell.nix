@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -39,7 +39,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -73,7 +73,8 @@
         "--config"
         "$out/nushell/config.nu"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "Squawkykaka" ];

@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -63,7 +63,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep listToAttrs;
@@ -106,7 +106,8 @@
         "--config-dir"
         "$out/zathura"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "bivsk" ];

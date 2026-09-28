@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -40,7 +40,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -73,7 +73,8 @@
         "--config-default-files=false"
         "--config-file=$out/ghostty/config.ghostty"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "bivsk" ];

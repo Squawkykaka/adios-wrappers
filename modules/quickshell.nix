@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -23,7 +23,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     assert options ? configDir;
     inputs.mkWrapper {
@@ -39,7 +39,8 @@
         rm $out/bin/qs
         ln $out/bin/quickshell $out/bin/qs
       '';
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "Squawkykaka" ];

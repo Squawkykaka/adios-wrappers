@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -36,7 +36,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.lib) optionals;
@@ -64,7 +64,8 @@
           "-o"
           options.outputName
         ]);
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

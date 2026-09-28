@@ -1,4 +1,4 @@
-{ types, assertions, ... } @ adios:
+{ types, promise, assertions, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -85,7 +85,7 @@
       '';
   };
 
-  impl = { options, inputs }: inputs.mkWrapper options.wrapperAttrs;
+  result = promise ({ options, inputs }: inputs.mkWrapper options.wrapperAttrs);
 
   meta = {
     maintainers = [ "llakala" ];

@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -44,14 +44,15 @@
       '';
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     inputs.mkWrapper {
       inherit (options) package;
       environment = {
         _ZO_EXCLUDE_DIRS = options.excludedDirs or null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

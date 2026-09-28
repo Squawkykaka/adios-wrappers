@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -36,7 +36,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       generator = inputs.nixpkgs.pkgs.formats.toml {};
@@ -56,7 +56,8 @@
       environment = {
         NOCTALIA_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [

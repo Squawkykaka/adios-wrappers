@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -47,7 +47,7 @@
     (assertions.disjoint "ignoreContents" "ignoreFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -73,7 +73,8 @@
         else
           []
       );
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "itsyunaya" ];

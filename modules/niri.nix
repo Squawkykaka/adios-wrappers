@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -23,7 +23,7 @@
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     if options ? configFiles then
       let
@@ -60,7 +60,8 @@
         };
       }
     else
-      options.package;
+      options.package
+  );
 
   meta = {
     maintainers = [ "coca" ];

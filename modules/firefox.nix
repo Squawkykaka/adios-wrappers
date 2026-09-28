@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
@@ -60,7 +60,7 @@
     (assertions.disjoint "policies" "policiesFiles")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) wrapFirefox;
@@ -82,7 +82,8 @@
           map (file: "${file}") options.autoConfigFiles
         else
           null;
-    });
+    })
+  );
 
   meta = {
     maintainers = [ "llakala" ];

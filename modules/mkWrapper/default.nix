@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 let
   nullOrString = types.nullOr types.string;
 in {
@@ -87,7 +87,7 @@ in {
     };
   };
 
-  impl =
+  result = promise (
     let
       inherit (builtins) attrNames concatMap concatStringsSep;
       ifNotNull = x: if x != null then x else "";
@@ -169,5 +169,6 @@ in {
         }
         ${ifNotNull options.postWrap}
       '';
-    };
+    }
+  );
 }

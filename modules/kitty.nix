@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -89,7 +89,7 @@
       '';
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -150,7 +150,8 @@
       environment = {
         KITTY_CONFIG_DIRECTORY = "$out/kitty";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

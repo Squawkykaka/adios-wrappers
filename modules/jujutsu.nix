@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -46,7 +46,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -74,7 +74,8 @@
       environment = {
         JJ_CONFIG = "$out/jj-config";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "es-sai-fi" ];

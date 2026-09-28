@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
@@ -47,7 +47,7 @@
     (assertions.disjoint "configContents" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -77,7 +77,8 @@
       environment = {
         "XDG_CONFIG_HOME" = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "itsyunaya" ];
