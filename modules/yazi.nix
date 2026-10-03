@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -92,7 +92,7 @@
 
     extraPackages = {
       type = types.listOf types.derivation;
-      defaultFunc =
+      default = promise (
         { inputs }:
         with inputs.nixpkgs.pkgs; [
           jq
@@ -106,7 +106,8 @@
           imagemagick
           chafa
           resvg
-        ];
+        ]
+      );
       description = ''
         Packages to be automatically added as Yazi dependencies.
 
@@ -135,7 +136,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.yazi-unwrapped;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.yazi-unwrapped);
       description = ''
         The yazi package to be wrapped.
         Note that this should use a `-unwrapped` variant.
@@ -149,7 +150,7 @@
     (assertions.disjoint "initLua" "initLuaFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) pkgs writeText;
@@ -211,7 +212,8 @@
       environment = {
         YAZI_CONFIG_HOME = "$out/yazi";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

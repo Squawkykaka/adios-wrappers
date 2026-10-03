@@ -22,7 +22,7 @@ Given an Adios module defined as such:
     };
   };
 
-  impl = { options }: options.num1 + options.num2;
+  result = promise ({ options }: options.num1 + options.num2);
 }
 ```
 
@@ -105,14 +105,17 @@ let
       };
       age-someday = {
         type = types.int;
-        defaultFunc = { options }: options.age + 1;
+        default = promise ({ options }: options.age + 1);
       };
     };
 
-    impl = { options }: ''
-      You are ${toString options.age} years old.
-      Someday, you will be ${toString options.age-someday} years old.
-    '';
+    result = promise (
+      { options }:
+      ''
+        You are ${toString options.age} years old.
+        Someday, you will be ${toString options.age-someday} years old.
+      ''
+    );
   };
 
 
@@ -120,7 +123,7 @@ let
     options = {
       age.default = 35;
       age-someday.type = types.float;
-      age-someday.defaultFunc = { options }: options.age + 0.1;
+      age-someday.default = promise ({ options }: options.age + 0.1);
     };
   };
 

@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -52,12 +52,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.hayabusa;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.hayabusa);
       description = "The hayabusa package to be wrapped";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs) pkgs;
@@ -85,7 +85,8 @@
       environment = {
         XDG_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

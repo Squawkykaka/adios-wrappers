@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -31,7 +31,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.ripgrep;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.ripgrep);
       description = "The ripgrep package to be wrapped.";
     };
   };
@@ -40,7 +40,7 @@
     (assertions.disjoint "flags" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     if options ? flags then
       inputs.mkWrapper {
@@ -51,7 +51,8 @@
         environment = {
           RIPGREP_CONFIG_PATH = options.configFile or null;
         };
-      };
+      }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

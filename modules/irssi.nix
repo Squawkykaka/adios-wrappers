@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -54,7 +54,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.irssi;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.irssi);
       description = "The irssi package to be wrapped.";
     };
   };
@@ -63,7 +63,7 @@
     (assertions.disjoint "configDir" "config")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -93,7 +93,8 @@
         "$out/irssi" = options.configDir or null;
       };
       flags = homeFlag ++ configFlag ++ autoconnectFlag ++ nicknameFlag ++ hostnameFlag;
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

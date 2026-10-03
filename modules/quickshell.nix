@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -18,12 +18,12 @@
     };
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.quickshell;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.quickshell);
       description = "The quickshell package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     assert options ? configDir;
     inputs.mkWrapper {
@@ -39,7 +39,8 @@
         rm $out/bin/qs
         ln $out/bin/quickshell $out/bin/qs
       '';
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "Squawkykaka" ];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -37,7 +37,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.eza;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.eza);
       description = "The eza package to be wrapped.";
     };
   };
@@ -46,7 +46,7 @@
     (assertions.disjoint "theme" "themeFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -66,7 +66,8 @@
       environment = {
         EZA_CONFIG_DIR = "$out/eza-config";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "EpicEric" ];

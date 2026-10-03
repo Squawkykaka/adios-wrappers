@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -47,7 +47,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.discordo;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.discordo);
       description = "The discordo package to be wrapped.";
     };
   };
@@ -56,7 +56,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -84,7 +84,8 @@
           else
             null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

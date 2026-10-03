@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -63,7 +63,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.waybar;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.waybar);
       description = "The waybar package to be wrapped.";
     };
   };
@@ -73,7 +73,7 @@
     (assertions.disjoint "barStyle" "cssFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText formats;
@@ -99,7 +99,8 @@
       environment = {
         GTK_DEBUG = if (options.interactiveEnv or false) then "interactive" else null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

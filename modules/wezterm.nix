@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -38,7 +38,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.wezterm;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.wezterm);
       description = "The wezterm package to be wrapped.";
     };
   };
@@ -47,7 +47,7 @@
     (assertions.disjoint "configContents" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) listToAttrs;
@@ -80,7 +80,8 @@
         # Lua is dum sometimes
         LUA_PATH = "$out/wezterm-config/?.lua";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

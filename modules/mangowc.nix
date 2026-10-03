@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -50,12 +50,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.mango;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.mango);
       description = "The mangowc package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText formats;
@@ -98,7 +98,8 @@
             null;
       };
       flags = configFlag ++ autostartFlag;
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "Squawkykaka" ];

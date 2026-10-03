@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
@@ -48,7 +48,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.firefox-unwrapped;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.firefox-unwrapped);
       description = ''
         The Firefox package to be wrapped.
         Note that this should use a `-unwrapped` variant.
@@ -60,7 +60,7 @@
     (assertions.disjoint "policies" "policiesFiles")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) wrapFirefox;
@@ -82,7 +82,8 @@
           map (file: "${file}") options.autoConfigFiles
         else
           null;
-    });
+    })
+  );
 
   meta = {
     maintainers = [ "llakala" ];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -38,7 +38,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.dunst;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.dunst);
       description = "The dunst package to be wrapped.";
     };
   };
@@ -47,7 +47,7 @@
     (assertions.disjoint "configContents" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) listToAttrs;
@@ -79,7 +79,8 @@
       environment = {
         XDG_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -33,7 +33,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.hyfetch;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.hyfetch);
       description = "The hyfetch package to be wrapped.";
     };
   };
@@ -42,7 +42,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -64,7 +64,8 @@
         "--config-file"
         "$out/hyfetch/hyfetch.json"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "coca" ];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -68,7 +68,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zellij;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zellij);
       description = "The zellij package to be wrapped.";
     };
   };
@@ -78,7 +78,7 @@
     (assertions.disjoint "layoutsContents" "layoutsFiles")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) listToAttrs attrNames;
@@ -125,7 +125,8 @@
       environment = {
         ZELLIJ_CONFIG_DIR = "$out/zellij-config";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [

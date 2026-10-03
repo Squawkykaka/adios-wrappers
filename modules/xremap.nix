@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -40,7 +40,7 @@
         The xremap package to be wrapped.
         Note that this should match the version for your desktop environment or compositor.
       '';
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.xremap;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.xremap);
     };
   };
 
@@ -48,7 +48,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.lib) optionals;
@@ -71,7 +71,8 @@
         ++ (optionals (options ? configFile || options ? settings) [
           "$out/config.yml"
         ]);
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "EpicEric" ];

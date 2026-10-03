@@ -1,5 +1,5 @@
 # thank you to Gerg-L for his work on mnw, as most of the bash is copied from there.
-{ types, assertions, ... }:
+{ types, assertions, promise, ... }:
 {
   inputs = {
     nixpkgs.from = { parent }: parent.nixpkgs;
@@ -118,7 +118,7 @@
     package = {
       type = types.derivation;
       description = "The neovim package to be wrapped.";
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.neovim-unwrapped;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.neovim-unwrapped);
     };
   };
 
@@ -126,7 +126,7 @@
     (assertions.disjoint "initLuaFile" "initLuaContents")
   ];
 
-  impl =
+  result = promise (
     { inputs, options }:
     let
       inherit (builtins)
@@ -237,7 +237,8 @@
       postWrap = concatStringsSep "\n" (
         map (x: ''ln -s "$out/bin/nvim" "$out/bin/${x}"'') (options.aliases or [])
       );
-    };
+    }
+  );
 
   meta = {
     maintainers = [

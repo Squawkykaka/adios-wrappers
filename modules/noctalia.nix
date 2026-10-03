@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -32,11 +32,11 @@
     package = {
       type = types.derivation;
       description = "The noctalia package to be wrapped.";
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.noctalia;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.noctalia);
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       generator = inputs.nixpkgs.pkgs.formats.toml {};
@@ -56,7 +56,8 @@
       environment = {
         NOCTALIA_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [

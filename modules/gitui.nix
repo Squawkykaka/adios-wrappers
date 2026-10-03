@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -129,7 +129,7 @@
     package = {
       type = types.derivation;
       description = "The gitui package to be wrapped.";
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.gitui;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.gitui);
     };
   };
 
@@ -139,7 +139,7 @@
     (assertions.disjoint "theme" "themeFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -221,7 +221,8 @@
       environment = {
         XDG_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -143,12 +143,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zsh;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zsh);
       description = "The zsh package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -224,7 +224,8 @@
       environment = {
         ZDOTDIR = if shouldConfigure then "$out" else null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.satty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.satty);
       description = "The Satty package to be wrapped.";
     };
   };
@@ -38,7 +38,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -60,7 +60,8 @@
         "--config"
         "$out/satty/config.toml"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "coca" ];

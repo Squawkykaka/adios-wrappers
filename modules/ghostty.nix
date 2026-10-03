@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -35,12 +35,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.ghostty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.ghostty);
       description = "The ghostty package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats;
@@ -73,7 +73,8 @@
         "--config-default-files=false"
         "--config-file=$out/ghostty/config.ghostty"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "bivsk" ];

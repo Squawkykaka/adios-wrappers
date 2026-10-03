@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -34,12 +34,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.nushell;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.nushell);
       description = "The nushell package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -73,7 +73,8 @@
         "--config"
         "$out/nushell/config.nu"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "Squawkykaka" ];

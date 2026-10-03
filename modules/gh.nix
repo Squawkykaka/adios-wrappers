@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -37,7 +37,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.gh;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.gh);
       description = "The gh package to be wrapped.";
     };
   };
@@ -52,17 +52,18 @@
   ];
 
   mutations = {
-    "/git".settings =
+    "/git".settings = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
         finalWrapper = options {};
       in {
         credential."https://github.com".helper = "${getExe finalWrapper} auth git-credential";
-      };
+      }
+    );
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) mapAttrs;
@@ -103,7 +104,8 @@
         environment = {
           GH_CONFIG_DIR = "$out/gh";
         };
-      };
+      }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -34,7 +34,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.less;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.less);
       description = "The less package to be wrapped.";
     };
   };
@@ -43,7 +43,7 @@
     (assertions.disjoint "flags" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -54,7 +54,8 @@
         LESS = if options ? flags then concatStringsSep " " options.flags else null;
         LESSKEYIN = options.configFile or null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

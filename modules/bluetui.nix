@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.bluetui;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.bluetui);
       description = "The bluetui package to be wrapped.";
     };
   };
@@ -38,7 +38,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs) pkgs;
@@ -58,7 +58,8 @@
       environment = {
         XDG_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -18,12 +18,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.niri;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.niri);
       description = "The niri package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     if options ? configFiles then
       let
@@ -60,7 +60,8 @@
         };
       }
     else
-      options.package;
+      options.package
+  );
 
   meta = {
     maintainers = [ "coca" ];

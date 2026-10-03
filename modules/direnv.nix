@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -46,7 +46,7 @@
 
     nix-direnv = {
       type = types.nullOr types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.nix-direnv;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.nix-direnv);
       description = ''
         The nix-direnv package to integrate with the wrapped package, or null for no integration.
       '';
@@ -54,13 +54,13 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.direnv;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.direnv);
       description = "The direnv package to be wrapped.";
     };
   };
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
@@ -68,11 +68,12 @@
       in
       ''
         ${getExe finalWrapper} hook fish | source
-      '';
+      ''
+    );
 
     # shell configuration for nushell, uses home managers config since
     # direnv doesnt have a command to generate
-    "/nushell".shellInit =
+    "/nushell".shellInit = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
@@ -106,10 +107,11 @@
                 | load-env
             }
         )
-      '';
+      ''
+    );
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) formats writeText;
@@ -142,7 +144,8 @@
       environment = {
         XDG_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "Squawkykaka" ];

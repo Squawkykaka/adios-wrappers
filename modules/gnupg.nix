@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -29,7 +29,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.gnupg;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.gnupg);
       description = "The gnupg package to be wrapped.";
     };
   };
@@ -38,7 +38,7 @@
     (assertions.disjoint "settings" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -66,7 +66,8 @@
         "--options"
         "$out/gnupg/gpg.conf"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "coca" ];

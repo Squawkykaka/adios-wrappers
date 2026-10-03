@@ -1,4 +1,4 @@
-{ types, assertions, ... } @ adios:
+{ types, promise, assertions, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -61,7 +61,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.starship;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.starship);
       description = "The starship package to be wrapped.";
     };
   };
@@ -71,7 +71,7 @@
   ];
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options, inputs }:
       let
         finalWrapper = options {};
@@ -82,10 +82,11 @@
         ${getExe finalWrapper} init fish --print-full-init \
           | string replace --all "${getExe options.package}" "${getExe finalWrapper}" \
           | source
-      '';
+      ''
+    );
   };
 
-  impl = { options, inputs }: inputs.mkWrapper options.wrapperAttrs;
+  result = promise ({ options, inputs }: inputs.mkWrapper options.wrapperAttrs);
 
   meta = {
     maintainers = [ "llakala" ];

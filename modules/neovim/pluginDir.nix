@@ -1,9 +1,4 @@
-{
-  stdenvNoCC,
-  envsubst,
-  lib,
-  ...
-}:
+{ stdenvNoCC, envsubst, lib, ... }:
 { package, startPlugins, optPlugins }:
 let
   inherit (lib) attrNames attrValues getExe map;

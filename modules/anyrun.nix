@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -57,7 +57,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.anyrun;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.anyrun);
       description = "The anyrun package to be wrapped.";
     };
   };
@@ -66,7 +66,7 @@
     (assertions.disjoint "cssContents" "cssFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -109,7 +109,8 @@
         "--config-dir"
         "$out/anyrun"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "itsyunaya" ];

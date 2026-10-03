@@ -1,4 +1,4 @@
-{ types, assertions, ... } @ adios:
+{ types, promise, assertions, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -161,7 +161,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.fish;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.fish);
       description = "The Fish package to be wrapped.";
     };
   };
@@ -171,7 +171,7 @@
     (assertions.disjoint "functions" "functionsFiles")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.pkgs) writeText;
@@ -222,7 +222,8 @@
         else
           {}
       );
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

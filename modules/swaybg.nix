@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -31,12 +31,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.swaybg;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.swaybg);
       description = "The swaybg package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (inputs.nixpkgs.lib) optionals;
@@ -64,7 +64,8 @@
           "-o"
           options.outputName
         ]);
-    };
+    }
+  );
 
   meta = {
     maintainers = [];

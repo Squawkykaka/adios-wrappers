@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -25,13 +25,13 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zoxide;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zoxide);
       description = "The zoxide package to be wrapped.";
     };
   };
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options, inputs }:
       let
         inherit (inputs.nixpkgs.lib) getExe;
@@ -41,17 +41,19 @@
       # fish
       ''
         ${getExe finalWrapper} init fish ${concatStringsSep " " options.flags} | source
-      '';
+      ''
+    );
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     inputs.mkWrapper {
       inherit (options) package;
       environment = {
         _ZO_EXCLUDE_DIRS = options.excludedDirs or null;
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

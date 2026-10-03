@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -66,7 +66,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.kitty;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.kitty);
       description = "The kitty package to be wrapped.";
     };
   };
@@ -78,7 +78,7 @@
   ];
 
   mutations = {
-    "/fish".interactiveShellInit =
+    "/fish".interactiveShellInit = promise (
       { options }:
       # fish
       ''
@@ -86,10 +86,11 @@
         # don't preserve attributes like this
         source "${options.package.shell_integration}/fish/vendor_conf.d/kitty-shell-integration.fish"
         set --prepend fish_complete_path "${options.package.shell_integration}/fish/vendor_completions.d"
-      '';
+      ''
+    );
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -150,7 +151,8 @@
       environment = {
         KITTY_CONFIG_DIRECTORY = "$out/kitty";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

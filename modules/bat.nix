@@ -1,4 +1,4 @@
-{ types, assertions, ... }:
+{ types, promise, assertions, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -25,7 +25,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.bat;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.bat);
       description = "The bat package to be wrapped.";
     };
   };
@@ -34,7 +34,7 @@
     (assertions.disjoint "flags" "configFile")
   ];
 
-  impl =
+  result = promise (
     { options, inputs }:
     if options ? flags then
       inputs.mkWrapper {
@@ -48,7 +48,8 @@
         };
       }
     else
-      options.package;
+      options.package
+  );
 
   meta = {
     maintainers = [ "llakala" ];

@@ -1,4 +1,4 @@
-{ types, assertions, ... } @ adios:
+{ types, promise, assertions, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -49,7 +49,7 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.git;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.git);
       description = "The git package to be wrapped.";
     };
   };
@@ -60,14 +60,15 @@
   ];
 
   mutations = {
-    "/starship".wrapperAttrs =
+    "/starship".wrapperAttrs = promise (
       { options }:
       {
         environment.XDG_CONFIG_HOME = options {};
-      };
+      }
+    );
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -95,7 +96,8 @@
       environment = {
         XDG_CONFIG_HOME = "$out";
       };
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "llakala" ];

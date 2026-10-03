@@ -1,4 +1,4 @@
-{ types, ... } @ adios:
+{ types, promise, ... } @ adios:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -58,12 +58,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.zathura;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.zathura);
       description = "The zathura package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep listToAttrs;
@@ -106,7 +106,8 @@
         "--config-dir"
         "$out/zathura"
       ];
-    };
+    }
+  );
 
   meta = {
     maintainers = [ "bivsk" ];

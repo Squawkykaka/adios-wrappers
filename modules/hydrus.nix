@@ -1,4 +1,4 @@
-{ types, ... }:
+{ types, promise, ... }:
 {
   inputs = {
     mkWrapper.from = { parent }: parent.mkWrapper;
@@ -31,12 +31,12 @@
 
     package = {
       type = types.derivation;
-      defaultFunc = { inputs }: inputs.nixpkgs.pkgs.hydrus;
+      default = promise ({ inputs }: inputs.nixpkgs.pkgs.hydrus);
       description = "The hydrus package to be wrapped.";
     };
   };
 
-  impl =
+  result = promise (
     { options, inputs }:
     let
       inherit (builtins) concatStringsSep;
@@ -53,7 +53,8 @@
           ''
         else
           "";
-    };
+    }
+  );
 
   meta = {
     maintainers = [];
